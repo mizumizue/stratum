@@ -4,8 +4,7 @@
   "description": "V-Model Traceability Matrix & Test Stratum Sufficiency Analyzer",
   "type": "module",
   "bin": {
-    "stratum": "./dist/cli/index.js",
-    "traceweave": "./dist/cli/index.js"
+    "stratum": "./dist/cli/index.js"
   },
   "scripts": {
     "dev": "tsx cli/index.ts",

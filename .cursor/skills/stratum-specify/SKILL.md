@@ -1,0 +1,10 @@
+---
+name: stratum-specify
+description: 実装せず docs/ 配下に V-Model（NEED, REQ, SPEC, DSN, TC）の仕様・決め事を記録する。Specify モード、仕様先行を求めたときに使う。
+---
+
+# stratum-specify
+
+**手順の正本:** [agents/modes/specify.md](../../agents/modes/specify.md) を読み、そのステップに従う。
+
+Cursor 固有の起動名は `/stratum-specify`。索引は `AGENTS.md`。

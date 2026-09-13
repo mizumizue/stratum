@@ -8,7 +8,7 @@ import { SufficiencyScorer } from '../core/sufficiency/SufficiencyScorer.js';
 import { BalanceAnalyzer } from '../core/analyzer/BalanceAnalyzer.js';
 import { MatrixBuilder } from '../core/matrix/MatrixBuilder.js';
 import { TraceGraph } from '../core/graph/TraceGraph.js';
-import { TraceWeaveReport, DocNode } from '../core/models/types.js';
+import { StratumDataPayload, DocNode } from '../core/models/types.js';
 
 export interface BuildReportOptions {
   docsDir?: string;
@@ -18,11 +18,11 @@ export interface BuildReportOptions {
   loadTestReport?: boolean;
 }
 
-export function buildStratumReport(options: BuildReportOptions = {}): {
-  report: TraceWeaveReport;
+export const buildStratumReport = (options: BuildReportOptions = {}): {
+  report: StratumDataPayload;
   graph: TraceGraph;
   nodes: DocNode[];
-} {
+} => {
   const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
   const docsDir = options.docsDir
     ? path.resolve(options.docsDir)
@@ -71,7 +71,4 @@ export function buildStratumReport(options: BuildReportOptions = {}): {
   const report = builder.buildReport(graph, sufficiencies, strata, pyramid, matrix);
 
   return { report, graph, nodes };
-}
-
-// Backwards-compatibility alias
-export const buildTraceWeaveReport = buildStratumReport;
+};

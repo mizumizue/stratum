@@ -60,7 +60,7 @@ test('TC-0004: SQLiteCache - ファイル更新日時（mtime）に基づくパ�
  * - 関連文書: TC-0004, REQ-0004, SPEC-0004
  */
 test('TC-0004: DocParser - ディレクトリ全体のパースにおいてSQLiteキャッシュが機能し高速化されること', () => {
-  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'traceweave-test-'));
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'stratum-test-'));
   const needsDir = path.join(tmpDir, 'needs');
   fs.mkdirSync(needsDir);
 

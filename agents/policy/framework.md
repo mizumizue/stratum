@@ -1,4 +1,4 @@
-# ForgOS + Stratum — 常時ルール（正本）
+# Stratum — 常時ルール（正本）
 
 ツール固有の自動適用は `.cursor/rules/framework.mdc`（Cursor adapter）。手順の正本は `agents/`。
 

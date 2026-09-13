@@ -81,7 +81,7 @@ test('TC-0014 & TC-0016: クリーンルート規約 - ルート直下の禁止�
   );
 
   // 5. Binary wrappers in bin/
-  const requiredBin = ['stratum', 'stratum.cmd', 'stratum.ps1', 'traceweave', 'traceweave.cmd', 'traceweave.ps1'];
+  const requiredBin = ['stratum', 'stratum.cmd', 'stratum.ps1'];
   for (const b of requiredBin) {
     assert.ok(
       fs.existsSync(path.join(rootDir, 'bin', b)),

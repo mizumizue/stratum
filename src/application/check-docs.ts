@@ -1,5 +1,5 @@
-import { buildTraceWeaveReport } from './build-report.js';
-import { TraceWeaveReport } from '../core/models/types.js';
+import { buildStratumReport } from './build-report.js';
+import { StratumDataPayload } from '../core/models/types.js';
 
 export interface CheckOptions {
   docsDir?: string;
@@ -10,7 +10,7 @@ export interface CheckResult {
   passed: boolean;
   errors: string[];
   warnings: string[];
-  report?: TraceWeaveReport;
+  report?: StratumDataPayload;
 }
 
 const VALID_TEST_LEVELS = [
@@ -38,7 +38,7 @@ export function checkDocs(options: CheckOptions = {}): CheckResult {
   const warnings: string[] = [];
 
   try {
-    const { report, graph, nodes } = buildTraceWeaveReport({
+    const { report, graph, nodes } = buildStratumReport({
       docsDir: options.docsDir,
       useCache: false,
     });

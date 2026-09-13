@@ -1,5 +1,5 @@
 /**
- * TraceWeave Web Dashboard URL State Management & History API Sync Utility
+ * Stratum Web Dashboard URL State Management & History API Sync Utility
  * 
  * SPEC-0019 / DSN-0010 に基づき、URL クエリパラメータと SPA 内部状態の
  * 双方向同期およびブラウザ履歴スタック制御を提供する。
@@ -275,7 +275,6 @@ export function syncBrowserHistory(
   try {
     const historyData = {
       stratum: true,
-      traceweave: true,
       state,
       timestamp: Date.now(),
     };

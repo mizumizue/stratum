@@ -3,7 +3,7 @@
 > **V-Model Traceability Matrix & Test Stratum Sufficiency Analyzer**  
 > 要求からテストまでの一貫した双方向トレーサビリティと、開発工程（単体・内結・外結・ST・UAT）×手法別の品質充足度・地層密度を可視化する品質保証プラットフォーム。
 
-本書は、Stratum（旧称: TraceWeave）を利用する開発者、QAエンジニア、プロジェクトマネージャー、および Cursor 等の AI エージェントを活用するエンジニアのための包括的な利用マニュアルです。
+本書は、Stratum を利用する開発者、QAエンジニア、プロジェクトマネージャー、および Cursor 等の AI エージェントを活用するエンジニアのための包括的な利用マニュアルです。
 
 ---
 
@@ -63,9 +63,9 @@ npm --prefix src test
 ```
 
 ### 透過実行ラッパー (`bin/stratum`)
-プロジェクトルートから直接コマンドを実行できるラッパースクリプトが用意されています（`bin/traceweave` も後方互換ラッパーとして同等に機能します）。
+プロジェクトルートから直接コマンドを実行できるラッパースクリプトが用意されています。
 
-- **macOS / Linux / Git Bash**: `./bin/stratum <command>`（または `./bin/traceweave <command>`）
+- **macOS / Linux / Git Bash**: `./bin/stratum <command>`
 - **Windows コマンドプロンプト**: `.\bin\stratum.cmd <command>`
 - **Windows PowerShell**: `.\bin\stratum.ps1 <command>`
 

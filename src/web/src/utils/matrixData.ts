@@ -1,4 +1,4 @@
-import { MatrixRow, TraceWeaveReport } from '../../../core/models/types.js';
+import { MatrixRow, StratumDataPayload } from '../../../core/models/types.js';
 
 export interface MatrixFilterOptions {
   searchQuery?: string;
@@ -57,6 +57,6 @@ export function serializeMatrixMarkdown(rows: MatrixRow[]): string {
   return header + body.join('\n');
 }
 
-export function serializeReportJson(report: TraceWeaveReport): string {
+export function serializeReportJson(report: StratumDataPayload): string {
   return JSON.stringify(report, null, 2);
 }

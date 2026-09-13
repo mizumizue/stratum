@@ -59,7 +59,7 @@ Execute the test suite and verify both assertion success and hygiene:
 | **Unit / Logic (UT)** | **Inline** (test body) | Type safety, locality, immediate causal visibility |
 | **Table-Driven Tests** | **Local array** (`const cases = [...]`) | Multi-case coverage without losing file cohesion |
 | **File I/O / Docs Trees (ITb / ST)** | **`tests/fixtures/<domain>/`** | Multi-file directories, syntax error fixtures, CLI test trees |
-| **Interactive Parameter Sets (REQ-0008)** | **`fixtures/test-cases/TC-xxxx.json`** | TraceWeave product contract for UI parameter editing |
+| **Interactive Parameter Sets (REQ-0008)** | **`fixtures/test-cases/TC-xxxx.json`** | Stratum product contract for UI parameter editing |
 
 ## Directory Conventions
 

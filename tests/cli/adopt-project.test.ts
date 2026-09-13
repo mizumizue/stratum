@@ -12,11 +12,11 @@ import {
 import { validateDocs } from '../../scripts/validate-docs.js';
 import { repositoryPath } from '../helpers/repo-path.js';
 
-test.describe('TraceWeave Adoption Engine (adopt-project)', () => {
+test.describe('Stratum Adoption Engine (adopt-project)', () => {
   let tempBaseDir: string;
 
   test.beforeEach(() => {
-    tempBaseDir = fs.mkdtempSync(path.join(os.tmpdir(), 'traceweave-adopt-test-'));
+    tempBaseDir = fs.mkdtempSync(path.join(os.tmpdir(), 'stratum-adopt-test-'));
   });
 
   test.afterEach(() => {
@@ -53,7 +53,7 @@ test.describe('TraceWeave Adoption Engine (adopt-project)', () => {
    *   2. docs/ 配下に V字モデルの全種別ドキュメントが配備されること
    *   3. bin/ 配下に実行ラッパーが配備されること
    *   4. 生成された docs/ が validateDocs の厳格スキーマ検査をエラー0件でパスすること
-   *   5. .traceweave-backup 配下にバックアップとマニフェストが保存されること
+   *   5. .stratum-backup 配下にバックアップとマニフェストが保存されること
    * - 関連文書: ADR-0007
    */
   test('adoptProject - overlayモードにおいて既存資材を温存し、スキーマ準拠のV字ドキュメント群およびラッパーが安全に配備されること', () => {
@@ -89,9 +89,6 @@ test.describe('TraceWeave Adoption Engine (adopt-project)', () => {
     assert.ok(fs.existsSync(path.join(tempBaseDir, 'bin', 'stratum')));
     assert.ok(fs.existsSync(path.join(tempBaseDir, 'bin', 'stratum.cmd')));
     assert.ok(fs.existsSync(path.join(tempBaseDir, 'bin', 'stratum.ps1')));
-    assert.ok(fs.existsSync(path.join(tempBaseDir, 'bin', 'traceweave')));
-    assert.ok(fs.existsSync(path.join(tempBaseDir, 'bin', 'traceweave.cmd')));
-    assert.ok(fs.existsSync(path.join(tempBaseDir, 'bin', 'traceweave.ps1')));
 
     // 4. validateDocs でスキーマ検査をパスすること
     const validation = validateDocs(path.join(tempBaseDir, 'docs'));
@@ -137,12 +134,11 @@ test.describe('TraceWeave Adoption Engine (adopt-project)', () => {
     // 2. ガバナンス文書とラッパーの配備
     assert.ok(fs.existsSync(path.join(tempBaseDir, 'DEVELOPER_GUIDE.md')));
     assert.ok(fs.existsSync(path.join(tempBaseDir, 'bin', 'stratum')));
-    assert.ok(fs.existsSync(path.join(tempBaseDir, 'bin', 'traceweave')));
 
     // 3. .gitignore にクリーンルート設定が含まれること
     const gitignoreContent = fs.readFileSync(path.join(tempBaseDir, '.gitignore'), 'utf-8');
     assert.ok(gitignoreContent.includes('src/node_modules/'));
-    assert.ok(gitignoreContent.includes('.traceweave-backup/'));
+    assert.ok(gitignoreContent.includes('.stratum-backup/'));
 
     // 4. フルバックアップの存在
     assert.ok(result.backupDir);

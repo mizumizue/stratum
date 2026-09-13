@@ -15,7 +15,7 @@ import { repositoryPath } from '../helpers/repo-path.js';
  * - 関連文書: TC-0027, REQ-0006, REQ-0007, SPEC-0006, SPEC-0007
  */
 test('TC-0027: DocParser & SQLiteCache - 詳細セクション抽出・テストケース実測値保持およびキャッシュ永続化の外部結合検証', () => {
-  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'traceweave-parser-cache-'));
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'stratum-parser-cache-'));
   const dbPath = path.join(tmpDir, 'cache.sqlite');
   const cache = new SQLiteCache(dbPath);
   const parser = new DocParser(cache);

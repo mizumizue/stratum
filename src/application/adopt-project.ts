@@ -137,14 +137,14 @@ export function createBackup(
 ): { backupDir: string; manifest: BackupManifest } {
   const resolvedTarget = path.resolve(targetDir);
   const timestamp = new Date().toISOString().replace(/[-:T]/g, '').slice(0, 14);
-  const defaultDir = path.join(resolvedTarget, '.traceweave-backup', `${timestamp}_${mode}`);
+  const defaultDir = path.join(resolvedTarget, '.stratum-backup', `${timestamp}_${mode}`);
   const backupDir = customBackupDir ? path.resolve(customBackupDir) : defaultDir;
 
   fs.mkdirSync(backupDir, { recursive: true });
 
   const backedUpFiles: string[] = [];
   const entriesToBackup = mode === 'restructure'
-    ? fs.readdirSync(resolvedTarget).filter(e => e !== '.git' && e !== 'node_modules' && e !== '.traceweave-backup')
+    ? fs.readdirSync(resolvedTarget).filter(e => e !== '.git' && e !== 'node_modules' && e !== '.stratum-backup')
     : ['docs', 'bin', '.cursor', 'scripts', 'DEVELOPER_GUIDE.md', 'SYSTEM_OVERVIEW.md'].filter(e =>
         fs.existsSync(path.join(resolvedTarget, e))
       );
@@ -190,7 +190,7 @@ export function rollbackAdoption(backupPath: string, silent = false): void {
   const targetDir = manifest.targetDir;
 
   if (!silent) {
-    console.log(`\n⏪ Rolling back TraceWeave changes in "${targetDir}" from backup "${manifestDir}"...`);
+    console.log(`\n⏪ Rolling back Stratum changes in "${targetDir}" from backup "${manifestDir}"...`);
   }
 
   // 1. Remove files created by adopt
@@ -533,14 +533,8 @@ if [[ -f "$ROOT/src/node_modules/.bin/stratum" ]]; then
   exec "$ROOT/src/node_modules/.bin/stratum" "$@"
 elif [[ -f "$ROOT/node_modules/.bin/stratum" ]]; then
   exec "$ROOT/node_modules/.bin/stratum" "$@"
-elif [[ -f "$ROOT/src/node_modules/.bin/traceweave" ]]; then
-  exec "$ROOT/src/node_modules/.bin/traceweave" "$@"
-elif [[ -f "$ROOT/node_modules/.bin/traceweave" ]]; then
-  exec "$ROOT/node_modules/.bin/traceweave" "$@"
 elif command -v stratum >/dev/null 2>&1; then
   exec stratum "$@"
-elif command -v traceweave >/dev/null 2>&1; then
-  exec traceweave "$@"
 else
   echo '{"ok":false,"error":"Stratum CLI not found. Please install stratum globally or add to dependencies."}' >&2
   exit 1
@@ -559,22 +553,9 @@ if exist "%ROOT%\\node_modules\\.bin\\stratum.cmd" (
   call "%ROOT%\\node_modules\\.bin\\stratum.cmd" %*
   exit /b %ERRORLEVEL%
 )
-if exist "%ROOT%\\src\\node_modules\\.bin\\traceweave.cmd" (
-  call "%ROOT%\\src\\node_modules\\.bin\\traceweave.cmd" %*
-  exit /b %ERRORLEVEL%
-)
-if exist "%ROOT%\\node_modules\\.bin\\traceweave.cmd" (
-  call "%ROOT%\\node_modules\\.bin\\traceweave.cmd" %*
-  exit /b %ERRORLEVEL%
-)
 where stratum >nul 2>&1
 if %ERRORLEVEL% equ 0 (
   stratum %*
-  exit /b %ERRORLEVEL%
-)
-where traceweave >nul 2>&1
-if %ERRORLEVEL% equ 0 (
-  traceweave %*
   exit /b %ERRORLEVEL%
 )
 
@@ -588,8 +569,6 @@ $Root = Split-Path -Parent $ScriptDir
 
 $LocalSrcBin = Join-Path $Root "src/node_modules/.bin/stratum.cmd"
 $LocalRootBin = Join-Path $Root "node_modules/.bin/stratum.cmd"
-$LegacySrcBin = Join-Path $Root "src/node_modules/.bin/traceweave.cmd"
-$LegacyRootBin = Join-Path $Root "node_modules/.bin/traceweave.cmd"
 
 if (Test-Path $LocalSrcBin) {
     & $LocalSrcBin $args
@@ -599,20 +578,8 @@ if (Test-Path $LocalRootBin) {
     & $LocalRootBin $args
     exit $LASTEXITCODE
 }
-if (Test-Path $LegacySrcBin) {
-    & $LegacySrcBin $args
-    exit $LASTEXITCODE
-}
-if (Test-Path $LegacyRootBin) {
-    & $LegacyRootBin $args
-    exit $LASTEXITCODE
-}
 if (Get-Command stratum -ErrorAction SilentlyContinue) {
     & stratum $args
-    exit $LASTEXITCODE
-}
-if (Get-Command traceweave -ErrorAction SilentlyContinue) {
-    & traceweave $args
     exit $LASTEXITCODE
 }
 
@@ -624,9 +591,6 @@ exit 1
     'bin/stratum': stratumBash,
     'bin/stratum.cmd': stratumCmd,
     'bin/stratum.ps1': stratumPs1,
-    'bin/traceweave': stratumBash,
-    'bin/traceweave.cmd': stratumCmd,
-    'bin/traceweave.ps1': stratumPs1,
   };
 }
 
@@ -663,7 +627,7 @@ export function adoptProject(options: AdoptionOptions = {}): {
   const silent = options.silent || false;
 
   if (!silent) {
-    console.log(`\n🚀 Initializing TraceWeave Adoption in "${targetDir}" [Mode: ${mode}]...`);
+    console.log(`\n🚀 Initializing Stratum Adoption in "${targetDir}" [Mode: ${mode}]...`);
   }
 
   // 1. Probe target
@@ -684,9 +648,9 @@ export function adoptProject(options: AdoptionOptions = {}): {
   if (options.dryRun) {
     if (!silent) {
       console.log(`\n🔍 [DRY RUN] Plan for mode "${mode}":`);
-      console.log(`  - Would backup existing assets to: ${options.backupDir || '.traceweave-backup/<timestamp>_' + mode}`);
-      console.log(`  - Would create TraceWeave V-Model docs (docs/needs, docs/requirements, etc.)`);
-      console.log(`  - Would install bin/traceweave wrappers`);
+      console.log(`  - Would backup existing assets to: ${options.backupDir || '.stratum-backup/<timestamp>_' + mode}`);
+      console.log(`  - Would create Stratum V-Model docs (docs/needs, docs/requirements, etc.)`);
+      console.log(`  - Would install bin/stratum wrappers`);
       console.log(`  - Would install .cursor/rules`);
       if (mode === 'restructure') {
         console.log(`  - Would migrate root source files to src/ and apply Clean-Root structure`);
@@ -747,7 +711,7 @@ export function adoptProject(options: AdoptionOptions = {}): {
   // 4. Generate Bin Wrappers
   const binWrappers = generateBinWrappers();
   for (const [relPath, content] of Object.entries(binWrappers)) {
-    const isBash = relPath === 'bin/stratum' || relPath === 'bin/traceweave';
+    const isBash = relPath === 'bin/stratum';
     writeFileTracked(relPath, content, isBash);
   }
 
@@ -783,11 +747,10 @@ export function adoptProject(options: AdoptionOptions = {}): {
     const gitignorePath = path.join(targetDir, '.gitignore');
     const ignoreRules = [
       '',
-      '# Stratum / TraceWeave & Clean Root',
+      '# Stratum & Clean Root',
       'src/node_modules/',
       'src/dist/',
       '.stratum-backup/',
-      '.traceweave-backup/',
       '.cache/',
       'reports/test-results.json',
       '',
@@ -805,7 +768,7 @@ export function adoptProject(options: AdoptionOptions = {}): {
     // Write DEVELOPER_GUIDE.md if missing
     const devGuidePath = path.join(targetDir, 'DEVELOPER_GUIDE.md');
     if (!fs.existsSync(devGuidePath)) {
-      const guideContent = `# Developer Guide - ${probe.projectName}\n\nThis project follows the Stratum (TraceWeave) Clean-Root convention and Doc-First V-Model workflow.\n\n- Documents: \`docs/\`\n- Source & Dependencies: \`src/\`\n- CLI Wrapper: \`./bin/stratum\` (or \`./bin/traceweave\`)\n`;
+      const guideContent = `# Developer Guide - ${probe.projectName}\n\nThis project follows the Stratum Clean-Root convention and Doc-First V-Model workflow.\n\n- Documents: \`docs/\`\n- Source & Dependencies: \`src/\`\n- CLI Wrapper: \`./bin/stratum\`\n`;
       writeFileTracked('DEVELOPER_GUIDE.md', guideContent);
     }
   }

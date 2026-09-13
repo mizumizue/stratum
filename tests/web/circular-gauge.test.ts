@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { calculateCircularGauge, getScoreColor } from '../../src/web/src/components/CircularGauge.js';
-import { buildTraceWeaveReport } from '../../src/application/build-report.js';
+import { buildStratumReport } from '../../src/application/build-report.js';
 import { repositoryPath } from '../helpers/repo-path.js';
 
 /**
@@ -79,13 +79,13 @@ test('TC-0012: CircularGauge - スコア閾値（80%以上: teal、50%〜79%: am
 
 /**
  * 【テスト概要】
- * - 対象: CircularGauge & TraceWeave レポート統合
+ * - 対象: CircularGauge & Stratum レポート統合
  * - 条件: docs/ 配下の実ドキュメントからレポートを生成し、全体スコア、各要件行スコア、各テスト層カバレッジ率を検査
  * - 期待結果: 全てのスコア・割合が円形ゲージ幾何計算に適合し、REQ-0010・SPEC-0010・TC-0012/0013のトレーサビリティ連鎖が確立していること
  * - 関連文書: TC-0013, REQ-0010, SPEC-0010
  */
 test('TC-0013: CircularGauge - ダッシュボード全体の各指標（全体スコア、要件行、テスト層カバレッジ）への円形ゲージ統合およびトレーサビリティの検証', () => {
-  const { report, graph } = buildTraceWeaveReport({ docsDir: repositoryPath('docs'), useCache: false });
+  const { report, graph } = buildStratumReport({ docsDir: repositoryPath('docs'), useCache: false });
 
   // 1. Header Global Scores
   assert.ok(

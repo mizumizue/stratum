@@ -10,7 +10,7 @@ import {
   getHomeUrlState,
   isOnlySearchQueryChanged,
 } from '../../src/web/src/utils/urlState.js';
-import { buildTraceWeaveReport } from '../../src/application/build-report.js';
+import { buildStratumReport } from '../../src/application/build-report.js';
 import { repositoryPath } from '../helpers/repo-path.js';
 
 /**
@@ -130,12 +130,12 @@ test('TC-0019: URL状態 - ホーム状態と検索条件変更の履歴更新�
 /**
  * 【テスト概要】
  * - 対象: V-model トレーサビリティ連鎖 (NEED-0008 -> REQ-0023, 0024 -> SPEC-0019 -> TC-0019)
- * - 条件: buildTraceWeaveReport を実行して有向グラフを検査
+ * - 条件: buildStratumReport を実行して有向グラフを検査
  * - 期待結果: 新設された要求・要件・仕様・テストケースの依存関係が正確に結合されていること
  * - 関連文書: TC-0019, NEED-0008, REQ-0023, REQ-0024, SPEC-0019
  */
 test('TC-0019: トレーサビリティ連鎖 - NEED-0008 から REQ-0023, REQ-0024, SPEC-0019, TC-0019 の双方向追跡の検証', () => {
-  const { graph } = buildTraceWeaveReport({ docsDir: repositoryPath('docs'), useCache: false });
+  const { graph } = buildStratumReport({ docsDir: repositoryPath('docs'), useCache: false });
 
   // 1. NEED-0008
   const need0008 = graph.getNode('NEED-0008');

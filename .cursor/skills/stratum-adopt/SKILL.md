@@ -10,7 +10,7 @@ Apply Stratum's V-Model traceability matrix and test stratum analyzer to any rep
 ## Leading words
 
 **probe** — Inspect repository topology: scan languages, testing setups, existing docs, package manifests, and git cleanliness.
-**checkpoint** — Guard existing assets: create a verified, timestamped backup and manifest (`.stratum-backup/` or `.traceweave-backup/`) before touching files.
+**checkpoint** — Guard existing assets: create a verified, timestamped backup and manifest (`.stratum-backup/`) before touching files.
 **overlay** — Apply non-destructive adoption: keep existing structure intact; add `docs/` V-Model skeleton, `bin/` wrappers, and `.cursor/rules/`.
 **restructure** — Apply full clean-root migration: reorganize the repository to Stratum clean-root standards (encapsulate source into `src/`, route commands via `bin/`, purge root clutter).
 **verify** — Prove mechanical correctness: run `./bin/stratum check` and ensure all starter docs strictly satisfy `docs-document-schema.mdc` with exit code 0.
@@ -32,7 +32,7 @@ Inspect the target repository before applying changes:
 3. Check Git working tree cleanliness via `git status --porcelain`.
 4. Determine adoption branch with the user:
    - **Branch A (overlay)**: Safe, temporary, non-destructive trial. Keeps existing structure unchanged.
-   - **Branch B (restructure)**: Permanent architecture migration. Reorganizes root to TraceWeave clean-root layout.
+   - **Branch B (restructure)**: Permanent architecture migration. Reorganizes root to Stratum clean-root layout.
 
 **Completion criterion**: Detected project attributes (language, test runner, git state) are documented, and adoption mode (`overlay` or `restructure`) is confirmed.
 
@@ -45,16 +45,16 @@ Create a safe backup before any modification:
    ```bash
    ./bin/stratum adopt "<targetDir>" --mode <overlay|restructure> --dry-run
    ```
-2. For live execution, ensure the backup directory (`.traceweave-backup/<timestamp>_<mode>/`) is created.
+2. For live execution, ensure the backup directory (`.stratum-backup/<timestamp>_<mode>/`) is created.
 3. Verify that `backup-manifest.json` exists inside the backup directory and lists all backed-up files.
 
-**Completion criterion**: A timestamped backup exists in `.traceweave-backup/` containing `backup-manifest.json` with a non-empty `backedUpFiles` record.
+**Completion criterion**: A timestamped backup exists in `.stratum-backup/` containing `backup-manifest.json` with a non-empty `backedUpFiles` record.
 
 ---
 
 ### 3. adopt (Execute Selected Mode)
 
-Apply TraceWeave using the adoption engine:
+Apply Stratum using the adoption engine:
 
 #### Branch A: Overlay Mode (`overlay`)
 Execute non-destructive overlay:
@@ -62,7 +62,7 @@ Execute non-destructive overlay:
 ./bin/stratum adopt "<targetDir>" --mode overlay
 ```
 1. Injects `docs/` V-Model skeleton (`NEED-0001`, `ACT-0001`, `UC-0001`, `REQ-0001`, `SPEC-0001`, `DSN-0001`, `ADR-0001`, `QA-0001`, `TC-0001`, `SYSTEM_OVERVIEW.md`) with detected project metadata.
-2. Injects transparent execution wrappers (`bin/stratum`, `bin/traceweave`, etc.).
+2. Injects transparent execution wrappers (`bin/stratum`).
 3. Injects Cursor rules (`.cursor/rules/docs-document-schema.mdc`, `implementation-workflow.mdc`).
 
 #### Branch B: Restructure Mode (`restructure`)
@@ -72,7 +72,7 @@ Execute full clean-root restructure:
 ```
 1. Executes all overlay steps above.
 2. Moves root development manifests (`package.json`, `tsconfig.json`) into `src/`.
-3. Injects clean-root `.gitignore` rules (`src/node_modules/`, `src/dist/`, `.stratum-backup/`, `.traceweave-backup/`).
+3. Injects clean-root `.gitignore` rules (`src/node_modules/`, `src/dist/`, `.stratum-backup/`).
 4. Injects root governance document `DEVELOPER_GUIDE.md`.
 
 **Completion criterion**: All starter files exist at target paths, executable permissions are set on `bin/stratum`, and no unbacked-up files were deleted.

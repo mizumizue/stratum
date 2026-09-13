@@ -1,10 +1,10 @@
 import React from 'react';
 import { AlertTriangle, Copy, CheckCircle2 } from 'lucide-react';
-import { DocNode, TraceWeaveReport } from '../../../core/models/types.js';
+import { DocNode, StratumDataPayload } from '../../../core/models/types.js';
 import { toast } from 'sonner';
 
 interface GapsViewProps {
-  gaps: TraceWeaveReport['gaps'];
+  gaps: StratumDataPayload['gaps'];
   nodeMap: Map<string, DocNode>;
   onSelectNode: (id: string) => void;
   onFilterInMatrix: (reqId: string) => void;

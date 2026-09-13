@@ -4,7 +4,7 @@ import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
 } from '@modelcontextprotocol/sdk/types.js';
-import { buildTraceWeaveReport } from '../application/build-report.js';
+import { buildStratumReport } from '../application/build-report.js';
 import { checkDocs } from '../application/check-docs.js';
 
 export async function startMcpServer(docsDir: string = './docs') {
@@ -74,7 +74,7 @@ export async function startMcpServer(docsDir: string = './docs') {
     const { name, arguments: args } = request.params;
 
     if (name === 'get_traceability_summary') {
-      const { report } = buildTraceWeaveReport({ docsDir });
+      const { report } = buildStratumReport({ docsDir });
       return {
         content: [
           {
@@ -86,7 +86,7 @@ export async function startMcpServer(docsDir: string = './docs') {
     }
 
     if (name === 'get_stratum_density') {
-      const { report } = buildTraceWeaveReport({ docsDir });
+      const { report } = buildStratumReport({ docsDir });
       return {
         content: [
           {
@@ -106,7 +106,7 @@ export async function startMcpServer(docsDir: string = './docs') {
 
     if (name === 'get_requirement_status') {
       const reqId = String(args?.requirementId || '');
-      const { report } = buildTraceWeaveReport({ docsDir });
+      const { report } = buildStratumReport({ docsDir });
       const row = report.matrix.find((r) => r.requirementId.toLowerCase() === reqId.toLowerCase());
       const suff = report.requirements.find((r) => r.requirementId.toLowerCase() === reqId.toLowerCase());
 

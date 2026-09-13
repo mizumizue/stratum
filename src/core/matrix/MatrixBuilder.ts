@@ -5,7 +5,7 @@ import {
   RequirementSufficiency,
   StratumReport,
   PyramidHealthReport,
-  TraceWeaveReport,
+  StratumDataPayload,
   TestLevel,
   TestMethod,
 } from '../models/types.js';
@@ -88,7 +88,7 @@ export class MatrixBuilder {
     strata: StratumReport[],
     pyramid: PyramidHealthReport,
     matrix: MatrixRow[]
-  ): TraceWeaveReport {
+  ): StratumDataPayload {
     const totalNeeds = graph.getNodesByKind('need').length;
     const totalRequirements = graph.getRequirements().length;
     const totalSpecifications = graph.getSpecifications().length;
