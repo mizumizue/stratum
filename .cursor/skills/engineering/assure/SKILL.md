@@ -1,6 +1,6 @@
 ---
 name: assure
-description: Coverage（specs→保証）と Discovery（specs 外の保証）の実現を点検する。モード外。
+description: Stratum のトレーサビリティカバレッジ（docs→TC）と地層健全性、客観的テスト実行を点検する。モード外。
 disable-model-invocation: true
 ---
 

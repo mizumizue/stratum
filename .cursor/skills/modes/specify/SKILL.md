@@ -1,6 +1,6 @@
 ---
 name: specify
-description: 実装せず L2/L3 に仕様・PBI を記録する。Specify モード、仕様先行、specified 完了を求めたときに使う。
+description: 実装せず docs/ 配下に V-Model（NEED, REQ, SPEC, DSN, TC）の仕様・決め事を記録する。Specify モード、仕様先行を求めたときに使う。
 ---
 
 # specify

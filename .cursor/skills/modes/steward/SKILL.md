@@ -1,6 +1,6 @@
 ---
 name: steward
-description: L1・スターター骨組み・モードスキルなど FW 自体をメンテする。Steward モード、憲法改定、配布物更新を求めたときに使う。
+description: リポジトリ規約、Cursor スキル・ルール、アーキテクチャ方針など FW 自体をメンテする。Steward モード、規約改定、ADR 提案を求めたときに使う。
 disable-model-invocation: true
 ---
 
