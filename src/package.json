@@ -15,6 +15,7 @@
     "test": "npm run build:web && tsx ../scripts/run-test-suite.ts",
     "test:raw": "npm run build:web && tsx --test ../tests/**/*.test.ts",
     "analyze:inputs": "tsx ../scripts/analyze-test-inputs.ts",
+    "lint:product": "tsx cli/index.ts lint-product",
     "typecheck": "tsc --noEmit",
     "lint": "tsx ../scripts/validate-docs.ts"
   },

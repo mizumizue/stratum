@@ -16,9 +16,10 @@ Stratum における品質保証（Assure）は、仕様（`docs/`）に対す�
 
 ## ステップ
 
-1. **ドキュメントリンク検査**:
+1. **ドキュメントリンク検査 & 製品コード静的解析**:
    ```bash
-   npm --prefix src run lint
+   npm --prefix src run lint       # FW仕様ドキュメント検証
+   ./bin/stratum lint-product      # 多言語製品コード静的解析
    ```
 2. **Stratum 地層健全性診断**:
    ```bash

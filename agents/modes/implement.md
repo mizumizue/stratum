@@ -31,4 +31,4 @@
 
 ## セッション完了
 
-関連テストがすべて緑（Pass）になり、型検査（`npm --prefix src run typecheck`）およびリント（`npm --prefix src run lint`）に違反がない。
+関連テストがすべて緑（Pass）になり、型検査（`npm --prefix src run typecheck`）およびリント（FWドキュメント: `npm --prefix src run lint`、製品コード: `./bin/stratum lint-product`）に違反がない。

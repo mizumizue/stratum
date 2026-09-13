@@ -9,7 +9,8 @@
 5. Stratum の可視化や分析の都合で製品コードの設計・配置・自由度を束縛しない。コードは自然に保守・テストしやすい構造を保つ。
 6. 秘密情報をログ・コミット・仕様・出力に出さない。
 7. Implement では TDD。単体・結合が緑になるまで完了と言わない。客観的レポート（`reports/test-results.json`）を証跡とする。
-8. ユーザー向け説明では **「継ぎ目」「シーム」を使わない**。公開インターフェース／アプリケーション境界／テスト境界／API など、平易またはシステム開発で一般的な語を使う。
-9. **文書の置き場:** エージェント向け手順の正本は `agents/`。ツール固有の起動・常時ガードは adapter（`.cursor/skills/`・`.cursor/rules/`、`CLAUDE.md` 等）。
-10. **品質と地層の可視化:** `bin/stratum check`、`bin/stratum report`、`bin/stratum matrix` による客観的フィードバックを活用する。
+8. **FW検査と製品解析の分離**: FW自身のドキュメントスキーマ検査（`validate-docs.ts`）と、製品コード（`src/`）の静的解析・リンター（`ProductLinter` / `./bin/stratum lint-product`）を明確に分離する。
+9. ユーザー向け説明では **「継ぎ目」「シーム」を使わない**。公開インターフェース／アプリケーション境界／テスト境界／API など、平易またはシステム開発で一般的な語を使う。
+10. **文書の置き場:** エージェント向け手順の正本は `agents/`。ツール固有の起動・常時ガードは adapter（`.cursor/skills/`・`.cursor/rules/`、`CLAUDE.md` 等）。
+11. **品質と地層の可視化:** `bin/stratum check`、`bin/stratum report`、`bin/stratum matrix` による客観的フィードバックを活用する。
 

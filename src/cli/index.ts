@@ -13,6 +13,8 @@ import { TestCaseInputAnalyzer } from '../core/analyzer/TestCaseInputAnalyzer.js
 import { DecisionsCatalogBuilder } from '../core/decisions/DecisionsCatalogBuilder.js';
 import { PortManager } from '../infrastructure/system/PortManager.js';
 import { adoptProject, rollbackAdoption, type AdoptionMode } from '../application/adopt-project.js';
+import { TestReportIngester, type SupportedReportFormat } from '../core/testing/TestReportIngester.js';
+import { ProductLinter, type ProductLanguage } from '../application/lint-product.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -506,6 +508,87 @@ program
       process.exit(0);
     } catch (err: any) {
       console.error(`\x1b[31mAdoption failed: ${err.message}\x1b[0m`);
+      process.exit(1);
+    }
+  });
+
+// Command: ingest-report (多言語テストレポートの取り込み)
+program
+  .command('ingest-report <file>')
+  .description('Ingest test execution report from any language (JUnit XML, TAP, Go JSON, Generic JSON) into Stratum')
+  .option('-f, --format <format>', 'Report format (auto, junit, tap, go, generic)', 'auto')
+  .option('-o, --out <path>', 'Output report path', 'reports/test-results.json')
+  .option('-m, --merge', 'Merge into existing report file if present', true)
+  .option('--no-merge', 'Do not merge into existing report file')
+  .action((file, options) => {
+    try {
+      const resolvedFile = path.resolve(file);
+      if (!fs.existsSync(resolvedFile)) {
+        console.error(`\x1b[31mError: File not found: ${resolvedFile}\x1b[0m`);
+        process.exit(1);
+      }
+      console.log(`\n📥 Ingesting test report: ${resolvedFile}`);
+      const result = TestReportIngester.ingest(resolvedFile, {
+        format: options.format as SupportedReportFormat,
+        outputPath: path.resolve(options.out),
+        mergeWithExisting: options.merge,
+      });
+
+      console.log(`\x1b[32m✔ Successfully ingested ${result.parsedCount} test case(s) (format: ${result.detectedFormat})\x1b[0m`);
+      console.log(`  - Total: ${result.report.totalTests} | Passed: ${result.report.passedCount} | Failed: ${result.report.failedCount} | Skipped: ${result.report.skippedCount}`);
+      console.log(`  - Report saved to: ${result.outputPath}\n`);
+      process.exit(0);
+    } catch (err: any) {
+      console.error(`\x1b[31mReport ingestion failed: ${err.message}\x1b[0m`);
+      process.exit(1);
+    }
+  });
+
+// Command: lint-product (多言語製品コードの静的解析・リンター実行)
+program
+  .command('lint-product')
+  .description('Run multi-language linter/analyzer for product code in src/ (Python, Go, Rust, TS/JS, etc.)')
+  .option('-p, --product <dir>', 'Product directory path', './src')
+  .option('-l, --lang <language>', 'Language override (python, go, rust, typescript, javascript, cpp, java)')
+  .option('--fix', 'Automatically fix lint problems if supported', false)
+  .option('--dry-run', 'Print detected command without executing', false)
+  .action((options) => {
+    try {
+      const productDir = path.resolve(options.product);
+      console.log(`\n🔍 Running multi-language linter for product: ${productDir}`);
+
+      const { language, command, args, isCustom } = ProductLinter.resolveCommand({
+        productDir,
+        language: options.lang as ProductLanguage,
+        fix: options.fix,
+      });
+
+      console.log(`  - Detected Language: \x1b[36m${language}\x1b[0m${isCustom ? ' (custom config)' : ''}`);
+      console.log(`  - Command: \x1b[33m${command} ${args.join(' ')}\x1b[0m`);
+
+      if (options.dryRun) {
+        console.log(`\n\x1b[32m✔ Dry run complete.\x1b[0m\n`);
+        process.exit(0);
+      }
+
+      const res = ProductLinter.run({
+        productDir,
+        language: options.lang as ProductLanguage,
+        fix: options.fix,
+      });
+
+      if (res.stdout) process.stdout.write(res.stdout);
+      if (res.stderr) process.stderr.write(res.stderr);
+
+      if (!res.success) {
+        console.error(`\n\x1b[31m✖ Product lint failed with exit code ${res.exitCode}\x1b[0m\n`);
+        process.exit(res.exitCode || 1);
+      } else {
+        console.log(`\n\x1b[32m✔ Product lint passed successfully!\x1b[0m\n`);
+        process.exit(0);
+      }
+    } catch (err: any) {
+      console.error(`\x1b[31mProduct lint execution failed: ${err.message}\x1b[0m`);
       process.exit(1);
     }
   });

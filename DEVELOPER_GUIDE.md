@@ -142,4 +142,10 @@ stratum/
 # src/ 配下での直接ビルド・テスト
 npm --prefix src run build
 npm --prefix src test
+
+# 製品コード（src/）の多言語静的解析・リンター実行（Python, Go, Rust, TS 等）
+./bin/stratum lint-product
+
+# 多言語テスト結果レポート（JUnit XML, TAP, Go JSON 等）のインジェスト
+./bin/stratum ingest-report <report-file>
 ```

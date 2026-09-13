@@ -65,7 +65,7 @@ links: [] # 非依存の横断参照
 ※ `execution_status` および `actual_result` の静的記述・手動更新は廃止（ADR-0006）。テストスクリプト実行レポート（reports/test-results.json）から動的に供給・結合する。
 
 ### quality_assurance (QA) の記載原則（実装非依存）
-- **実装コード・ファイルパス参照禁止**: `tests/**/*.test.ts` や `src/...` などの具体的ファイルパス、クラス名、関数名を記述してはならない（`scripts/validate-docs.ts` で自動検査）。個別のテスト手順は `TC-` に委ね、`QA-` には集約された品質特性と合否判定基準・証跡を記述する。
+- **実装コード・ファイルパス参照禁止**: `tests/**/*` や `src/...` などの具体的ファイルパス（`.ts`, `.py`, `.go`, `.rs`, `.cpp` 等）、クラス名、関数名を記述してはならない（`scripts/validate-docs.ts` で自動検査）。個別のテスト手順は `TC-` に委ね、`QA-` には集約された品質特性と合否判定基準・証跡を記述する。
 
 ## 3. Headings after `## Content` (順序固定)
 

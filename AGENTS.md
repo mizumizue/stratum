@@ -48,6 +48,7 @@ reports/test-results.json + Stratum 診断  [Audit]
 - **決め事は What**: How・内部構造・手順は書かない。
 - **ツールの都合で実装構造を歪めない**: Stratum の可視化・分析のために製品実装の自由度や自然な保守性を妨げない（特定言語・アーキテクチャ前提に縛られない）。
 - **実装は TDD**: 単体・結合が緑になるまで完了と言わない。`npm --prefix src test` による決定論的レポートを証跡とする。
+- **FW検査と製品解析の分離 (ADR-0008)**: FW自身のドキュメントスキーマ検査（`validate-docs.ts`）と、製品コード（`src/`）の静的解析・リンター（`ProductLinter` / `./bin/stratum lint-product`）を明確に分離。
 - **客観的事実の検証（ADR-0006）**: `docs/test-cases/` に LLM や人間による作文エビデンスを書き込まない。テスト実行プロセスが出力する `reports/test-results.json` を唯一の合否証拠とする。
 - **秘密情報をログ・コミット・仕様に出さない**。
 

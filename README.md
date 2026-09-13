@@ -144,6 +144,12 @@ stratum/
 ./bin/stratum adopt /path/to/project --mode overlay
 ./bin/stratum adopt /path/to/project --mode restructure
 
+# 多言語テスト結果レポート（JUnit XML, TAP, Go JSON 等）のインジェスト
+./bin/stratum ingest-report /path/to/junit.xml
+
+# 製品コード（src/）の多言語静的解析・リンター実行（Python, Go, Rust, TS 等）
+./bin/stratum lint-product
+
 # （オプショナル）ローカル可視化プレビューサーバーの起動
 ./bin/stratum serve --port 3000
 ```

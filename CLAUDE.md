@@ -26,10 +26,12 @@
 ## Stratum コマンド（品質・トレーサビリティ検証）
 
 ```bash
-./bin/stratum check      # 仕様・リンク整合性の検査
-./bin/stratum report     # 地層密度・ピラミッド診断
-./bin/stratum matrix     # トレーサビリティマトリクス表示
-./bin/stratum serve      # Web ダッシュボードのローカル起動
+./bin/stratum check         # 仕様・リンク整合性の検査
+./bin/stratum report        # 地層密度・ピラミッド診断
+./bin/stratum matrix        # トレーサビリティマトリクス表示
+./bin/stratum lint-product  # 製品コード（src/）の多言語静的解析・リンター
+./bin/stratum ingest-report # 多言語テスト結果（JUnit, TAP, Go JSON等）の取り込み
+./bin/stratum serve         # Web ダッシュボードのローカル起動
 ```
 
 ## 編集の注意
