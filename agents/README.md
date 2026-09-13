@@ -6,9 +6,7 @@
 |------|------|
 | ルーター | `ask-me.md` |
 | Mode | `modes/{spike,specify,implement,audit,steward}.md` |
-| Pipeline | `pipeline/{spec-source,promote,map,cut}/playbook.md` |
 | Engineering | `engineering/{tdd,assure}/playbook.md` |
-| Bootstrap | `bootstrap-product/playbook.md` |
 | 常時ポリシー | `policy/` |
 
 索引のハブはリポジトリルートの `AGENTS.md`。

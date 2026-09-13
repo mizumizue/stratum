@@ -1,6 +1,6 @@
 ---
 name: audit
-description: 仕様と実装の乖離、および仕様の拡大解釈を指摘リストにする。Audit モード、Conform チェック、done 前点検を求めたときに使う。
+description: 仕様と実装の乖離、および Stratum トレーサビリティ・地層健全性を点検する。Audit モード、Conform チェック、品質点検を求めたときに使う。
 ---
 
 # audit

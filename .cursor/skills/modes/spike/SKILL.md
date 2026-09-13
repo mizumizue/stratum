@@ -1,6 +1,6 @@
 ---
 name: spike
-description: あいまいな要件を Source＋sandbox で探索する。Spike モード、スパイク、仮説検証を求めたときに使う。
+description: あいまいな要件をプロトタイプや検証コードで探索する。Spike モード、スパイク、仮説検証を求めたときに使う。
 ---
 
 # spike

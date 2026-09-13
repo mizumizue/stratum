@@ -1,6 +1,6 @@
 ---
 name: ask-me
-description: このリポのモード・パイプライン・モード外スキルの案内。どれを起動すべきか迷ったときに使う。
+description: このリポのモード・V-Model・開発スキルの案内。どれを起動すべきか迷ったときに使う。
 disable-model-invocation: true
 ---
 

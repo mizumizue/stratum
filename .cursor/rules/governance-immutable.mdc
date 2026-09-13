@@ -1,0 +1,11 @@
+---
+description: ガバナンス・規約ファイルの編集制約
+globs: agents/policy/**, .cursor/rules/**
+alwaysApply: false
+---
+
+# ガバナンス編集制約（Cursor adapter）
+
+**正本:** `agents/policy/governance-immutable.md`。
+
+ガバナンス規約やポリシーは Agent が直接編集せず、Steward モードにおいてユーザーの明示的な意図または承認のもとで変更する。重要な方針決定は `docs/decisions/`（ADR）へ起票する。

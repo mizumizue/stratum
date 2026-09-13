@@ -18,4 +18,4 @@ date: YYYY-MM-DD
 
 ## 決め事への反映
 
-（規範はここに書かず、対応する `specs/**/decisions/` へ反映する）
+（規範はここに書かず、対応する `docs/decisions/` へ反映する）
