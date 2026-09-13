@@ -10,13 +10,24 @@
 
 ルート直下は製品のガバナンス・決め事・全体構成マップを最前面に配置し、実装コード・特定技術の設定資材は `src/` 配下に完全カプセル化します。ルート直下に個別の開発資材（フロントエンド設定、HTML、CSS設定、特定サブシステムのビルド設定等）を散乱させることは厳禁です。
 
+また、**ForgOS の工程手順（`agents/`、各モード）**に則り、作業時は指示の抽象度に応じて `Spike` / `Specify` / `Implement` / `Audit` / `Steward` を意識して進めます。
+
 ```text
 stratum/
 ├── README.md               # 製品概要、全体構成マップ、クイックスタート
 ├── USER_GUIDE.md           # ユーザーガイド: CLI・Web画面・MCP連携の完全利用マニュアル
 ├── ARCHITECTURE.md         # アーキテクチャ設計原則、レイヤー責務、システム構造図
 ├── DEVELOPER_GUIDE.md      # 本ファイル: 開発者ガイド、文書先行プロセス、リポジトリ規約
+├── CONTEXT.md              # プロジェクト文脈 & ForgOS 統合コンテキスト
+├── AGENTS.md               # エージェント向けガイダンス
+├── CLAUDE.md               # Claude Code アダプター
 ├── .gitignore              # Git 除外設定（src/node_modules/, src/dist/, .cache/ 等）
+│
+├── agents/                 # 【ForgOS 工程手順の正本】
+│   ├── modes/              # Spike, Specify, Implement, Audit, Steward
+│   ├── pipeline/           # map, cut, promote, spec-source
+│   ├── engineering/        # TDD, assure
+│   └── policy/             # 共通ポリシー (framework.md 等)
 │
 ├── docs/                   # 【製品の決め事】要求・要件・仕様・設計・ADR・品質・テスト
 │   ├── needs/              # 要求定義 (NEED-*)
