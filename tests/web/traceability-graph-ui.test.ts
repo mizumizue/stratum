@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { buildTraceWeaveReport } from '../../src/application/build-report.js';
+import { buildStratumReport } from '../../src/application/build-report.js';
 import { repositoryPath } from '../helpers/repo-path.js';
 import { TraceabilityGraphBuilder } from '../../src/core/graph/TraceabilityGraphBuilder.js';
 
@@ -12,7 +12,7 @@ import { TraceabilityGraphBuilder } from '../../src/core/graph/TraceabilityGraph
  * - 関連文書: TC-0018, REQ-0020, REQ-0021, REQ-0022, SPEC-0018
  */
 test('TC-0018: トレーサビリティグラフ - レイアウトと選択ノードのハイライト契約検証', () => {
-  const { graph, nodes } = buildTraceWeaveReport({ docsDir: repositoryPath('docs'), useCache: false });
+  const { graph, nodes } = buildStratumReport({ docsDir: repositoryPath('docs'), useCache: false });
   const graphData = TraceabilityGraphBuilder.buildGraph(nodes, { selectedNodeId: 'REQ-0020' });
   assert.ok(graphData.nodes.length > 0);
   assert.ok(graphData.nodes.some(node => node.isHighlighted));

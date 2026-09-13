@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import {
-  TraceWeaveReport,
+  StratumDataPayload,
   DocNode,
 } from '../../core/models/types.js';
 import { Toaster, toast } from 'sonner';
@@ -37,7 +37,7 @@ import {
 
 export default function App() {
   const initialUrlState = useMemo(() => parseUrlState(), []);
-  const [report, setReport] = useState<TraceWeaveReport | null>(null);
+  const [report, setReport] = useState<StratumDataPayload | null>(null);
   const [loading, setLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -61,7 +61,7 @@ export default function App() {
   const fetchData = useCallback(async (isManual = false) => {
     if (isManual) setIsRefreshing(true);
     try {
-      let data: TraceWeaveReport;
+      let data: StratumDataPayload;
       try {
         const res = await fetch('/api/data');
         if (!res.ok) throw new Error('API request failed');

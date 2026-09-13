@@ -1,7 +1,7 @@
-import { TraceWeaveReport, DecisionsCatalog, DecisionsCatalogItem } from '../../core/models/types.js';
+import { StratumDataPayload, DecisionsCatalog, DecisionsCatalogItem } from '../../core/models/types.js';
 
 export class ConsoleReporter {
-  public static printSummary(report: TraceWeaveReport): void {
+  public static printSummary(report: StratumDataPayload): void {
     const { summary, strata, pyramid, gaps } = report;
 
     console.log('\n\x1b[1m\x1b[36m============================================================\x1b[0m');
@@ -85,7 +85,7 @@ export class ConsoleReporter {
     console.log('\n\x1b[1m\x1b[36m============================================================\x1b[0m\n');
   }
 
-  public static printMatrixText(report: TraceWeaveReport): void {
+  public static printMatrixText(report: StratumDataPayload): void {
     console.log('\n\x1b[1m[Traceability Matrix]\x1b[0m\n');
     console.log('-------------------------------------------------------------------------------------------------------------');
     console.log('要件ID      重要度  スコア  紐づく仕様 (SPEC)       紐づくテスト (工程・手法)');

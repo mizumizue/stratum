@@ -1,6 +1,6 @@
-# Agent 向けメモ (ForgOS + Stratum)
+# Agent 向けメモ (Stratum)
 
-このリポジトリは、開発フレームワーク（**ForgOS**: AI 工程 OS）と品質地層・トレーサビリティ機能（**Stratum**）の「両軸」で、**製品（`src/`）**を開発・品質保証する環境です。
+このリポジトリは、開発フレームワーク（AI 工程 OS）と品質地層・トレーサビリティ機能の「両軸」で、**製品（`src/`）**を開発・品質保証する環境です。
 トレーサビリティやダッシュボードは製品そのものではなく、製品のための機能です。
 
 作業開始前に [CONTEXT.md](./CONTEXT.md) と [docs/SYSTEM_OVERVIEW.md](./docs/SYSTEM_OVERVIEW.md) を読む。
@@ -59,7 +59,7 @@ reports/test-results.json + Stratum 診断  [Audit]
 | `src/` | 製品（Product）の実装領域（特定のアーキテクチャ・設計指針に限定しない） |
 | `docs/` | 製品のための機能: 仕様・設計・決め事・テスト仕様の正本（NEED, REQ, SPEC, DSN, ADR, QA, TC） |
 | `tests/` | テストコード（Vitest スイート） |
-| `bin/` | 開発・品質実行用 CLI ラッパー（`bin/stratum`, `bin/traceweave`） |
+| `bin/` | 開発・品質実行用 CLI ラッパー（`bin/stratum`） |
 | `agents/` | 開発FW: 工程手順の正本（Mode, Engineering, Policy）。ツール入口は adapter |
 | `reports/` | 機械生成されたテスト実行結果・客観エビデンス（`reports/test-results.json`） |
 | `.cursor/` | Cursor 向けルール（`.cursor/rules/`）およびスキル（`.cursor/skills/`） |

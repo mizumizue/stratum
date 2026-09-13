@@ -14,7 +14,7 @@ export function ErrorScreen({ error, onRetry }: ErrorScreenProps) {
         <div className="text-lg font-bold text-rose-200">読み込みエラー</div>
         <p className="text-sm text-rose-300 mt-2">{error || 'データが空です'}</p>
         <div className="mt-4 p-3 bg-black/40 rounded-xl text-xs text-slate-400 text-left font-mono">
-          <code>$ stratum serve</code> (または <code>traceweave serve</code>)<br />
+          <code>$ stratum serve</code><br />
           <code>$ stratum build --out ./dist-web</code>
         </div>
         <button

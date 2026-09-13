@@ -2,10 +2,10 @@ import React from 'react';
 import { CircularGauge } from './CircularGauge.js';
 import { ChevronRight } from 'lucide-react';
 import { AppTab } from '../utils/urlState.js';
-import { TraceWeaveReport } from '../../../core/models/types.js';
+import { StratumDataPayload } from '../../../core/models/types.js';
 
 interface QualityMetricsGridProps {
-  summary: TraceWeaveReport['summary'];
+  summary: StratumDataPayload['summary'];
   highCriticalityCount: number;
   onNavigateTab: (tab: AppTab, message?: string) => void;
 }

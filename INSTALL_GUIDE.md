@@ -1,6 +1,6 @@
 # Stratum インストール & 導入ガイド (Installation & Adoption Guide)
 
-本書は、**Stratum**（ストラータム / 旧称: TraceWeave）の動作環境要件、初期セットアップ、CLI コマンドおよび MCP 連携の有効化、ならびに**異なる構造を持つ外部プロジェクトへの導入・適用手順（一時適用／完全再構成）**を網羅した公式ガイドです。
+本書は、**Stratum**（ストラータム）の動作環境要件、初期セットアップ、CLI コマンドおよび MCP 連携の有効化、ならびに**異なる構造を持つ外部プロジェクトへの導入・適用手順（一時適用／完全再構成）**を網羅した公式ガイドです。
 
 ---
 
@@ -42,8 +42,6 @@ Windows 環境（PowerShell / コマンドプロンプト）の場合は以下�
 # コマンドプロンプト (cmd)
 .\bin\stratum.cmd check
 ```
-
-※ 従来通りの `./bin/traceweave` ラッパーもエイリアスとして完全互換提供されています。
 
 ---
 
@@ -130,7 +128,7 @@ Stratum は **Model Context Protocol (MCP)** を標準サポートしていま�
 
 #### 実行後の状態
 - 対象プロジェクト直下に `docs/`（NEED, REQ, SPEC, DSN, ACT, UC, QA, TC, ADR）が配置されます。
-- 対象プロジェクトの `bin/stratum`（および `bin/traceweave`）ラッパーが配置され、対象ディレクトリ内で直接 `./bin/stratum check` や `./bin/stratum serve` が実行可能になります。
+- 対象プロジェクトの `bin/stratum` ラッパーが配置され、対象ディレクトリ内で直接 `./bin/stratum check` や `./bin/stratum serve` が実行可能になります。
 - 変更前の既存資産は `.stratum-backup/<タイムスタンプ>_overlay/` に安全に退避されます。
 
 ---

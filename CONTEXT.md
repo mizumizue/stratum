@@ -1,6 +1,6 @@
-# ForgOS + Stratum (Context)
+# Stratum (Context)
 
-リポジトリ規約と Cursor 第一の AI 工程 OS（**ForgOS**）に、V-Model トレーサビリティ・品質地層分析プラットフォーム（**Stratum**）を統合した環境。工程手順の正本は `agents/`、仕様・設計・検証の正本は `docs/`。
+確固たる開発プロセス規律（モード駆動開発）と、V-Model トレーサビリティ・品質地層分析プラットフォームを統合した環境。工程手順の正本は `agents/`、仕様・設計・検証の正本は `docs/`。
 
 ## Language
 

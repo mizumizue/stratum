@@ -1,7 +1,7 @@
-import { TraceWeaveReport } from '../../core/models/types.js';
+import { StratumDataPayload } from '../../core/models/types.js';
 
 export class MarkdownReporter {
-  public static generateMarkdown(report: TraceWeaveReport): string {
+  public static generateMarkdown(report: StratumDataPayload): string {
     const lines: string[] = [];
 
     lines.push('# Stratum Quality & Traceability Report\n');

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { buildTraceWeaveReport } from '../../src/application/build-report.js';
+import { buildStratumReport } from '../../src/application/build-report.js';
 import { repositoryPath } from '../helpers/repo-path.js';
 import { getHeaderLinkContract, shouldUseInternalNavigation } from '../../src/web/src/components/Header.js';
 import { getHomeUrlState } from '../../src/web/src/utils/urlState.js';
@@ -52,7 +52,7 @@ test('TC-0020: ホーム状態契約 - ヘッダーロゴ遷移先の初期状�
  * - 関連文書: TC-0020, REQ-0025, SPEC-0020
  */
 test('TC-0020: トレーサビリティ連鎖 - REQ-0025 から SPEC-0020 および TC-0020 の追跡関係の検証', () => {
-  const { graph } = buildTraceWeaveReport({ docsDir: repositoryPath('docs'), useCache: false });
+  const { graph } = buildStratumReport({ docsDir: repositoryPath('docs'), useCache: false });
 
   // 1. REQ-0025
   const req0025 = graph.getNode('REQ-0025');

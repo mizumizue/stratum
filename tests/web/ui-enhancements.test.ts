@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { buildTraceWeaveReport } from '../../src/application/build-report.js';
+import { buildStratumReport } from '../../src/application/build-report.js';
 import { repositoryPath } from '../helpers/repo-path.js';
 import { PYRAMID_LAYERS } from '../../src/web/src/components/VisualTestPyramid.js';
 import { getScoreColor } from '../../src/web/src/components/CircularGauge.js';
@@ -26,7 +26,7 @@ test('TC-0015: Web公開契約 - テストピラミッド、ゲージ閾値、�
   assert.equal(getScoreColor(50).stroke, '#fbbf24');
   assert.equal(getScoreColor(49).stroke, '#fb7185');
 
-  const { report, graph } = buildTraceWeaveReport({ docsDir: repositoryPath('docs'), useCache: false });
+  const { report, graph } = buildStratumReport({ docsDir: repositoryPath('docs'), useCache: false });
   const req0014 = graph.getNode('REQ-0014');
   assert.ok(req0014, 'REQ-0014 must exist in the graph');
   const spec0014 = graph.getNode('SPEC-0014');

@@ -1,9 +1,9 @@
 ---
-description: ForgOS モード駆動開発と Stratum 品質プロセスの統合ガイドライン
+description: Stratum モード駆動開発と品質プロセスのガイドライン
 alwaysApply: true
 ---
 
-# ForgOS + Stratum — 工程 OS & 品質規約（Cursor adapter）
+# Stratum — 工程 OS & 品質規約（Cursor adapter）
 
 **正本:** `agents/policy/framework.md` を読め。以下は要約。
 

@@ -4,18 +4,18 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
-import { buildTraceWeaveReport } from '../../src/application/build-report.js';
+import { buildStratumReport } from '../../src/application/build-report.js';
 import { repositoryPath } from '../helpers/repo-path.js';
 
 /**
  * 【テスト概要】
- * - 対象: buildTraceWeaveReport と CLI 静的ダッシュボード配備
+ * - 対象: buildStratumReport と CLI 静的ダッシュボード配備
  * - 条件: 実際の docs/ ディレクトリを対象に統合レポートを構築
  * - 期待結果: 全体サマリー、工程地層、マトリクス行、およびdata.json供給用ペイロードが決定論的に生成されること
  * - 関連文書: TC-0026, REQ-0004, SPEC-0005
  */
-test('TC-0026: buildTraceWeaveReport - レポート統合・静的データペイロード生成およびCLI配備の外部結合検証', () => {
-  const { report, graph, nodes } = buildTraceWeaveReport({ docsDir: repositoryPath('docs'), useCache: false });
+test('TC-0026: buildStratumReport - レポート統合・静的データペイロード生成およびCLI配備の外部結合検証', () => {
+  const { report, graph, nodes } = buildStratumReport({ docsDir: repositoryPath('docs'), useCache: false });
 
   // 1. Validate high-level report structure
   assert.ok(report, 'Report should be generated');
@@ -64,7 +64,7 @@ test('TC-0026: buildTraceWeaveReport - レポート統合・静的データペ�
   assert.equal(graphReqs.length, report.requirements.length);
   assert.equal(nodes.length, report.catalog?.totalCount || nodes.length);
 
-  const outDir = fs.mkdtempSync(path.join(os.tmpdir(), 'traceweave-build-'));
+  const outDir = fs.mkdtempSync(path.join(os.tmpdir(), 'stratum-build-'));
   try {
     execFileSync(
       process.execPath,

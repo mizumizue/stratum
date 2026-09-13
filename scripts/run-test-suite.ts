@@ -172,8 +172,8 @@ async function runTests(): Promise<void> {
     const distWebJson = path.join(ROOT, 'src', 'web', 'dist', 'data.json');
     if (fs.existsSync(path.dirname(distWebJson))) {
       try {
-        const { buildTraceWeaveReport } = await import('../src/application/build-report.js');
-        const { report } = buildTraceWeaveReport({
+        const { buildStratumReport } = await import('../src/application/build-report.js');
+        const { report } = buildStratumReport({
           docsDir: path.join(ROOT, 'docs'),
           useCache: false,
           testReportPath: REPORT_FILE,

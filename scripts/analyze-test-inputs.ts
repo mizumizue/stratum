@@ -18,7 +18,7 @@ const summary = TestCaseInputAnalyzer.summarize(analyses);
 if (format === 'json') {
   console.log(JSON.stringify(summary, null, 2));
 } else if (format === 'markdown') {
-  console.log('# TraceWeave - Test Case UI Input Modifiability Analysis\n');
+  console.log('# Stratum - Test Case UI Input Modifiability Analysis\n');
   console.log(`- **Total Test Cases**: ${summary.totalTestCases}`);
   console.log(`- **Modifiable (UI変更可能)**: ${summary.modifiableCount}`);
   console.log(`- **Unmodifiable (UI実行対象外・除外)**: ${summary.unmodifiableCount}\n`);

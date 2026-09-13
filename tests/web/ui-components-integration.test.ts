@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { buildTraceWeaveReport } from '../../src/application/build-report.js';
+import { buildStratumReport } from '../../src/application/build-report.js';
 import { repositoryPath } from '../helpers/repo-path.js';
 import { appendModalHistory, moveModalHistory } from '../../src/web/src/components/modalNavigation.js';
 import { createPyramidLayerClickHandler } from '../../src/web/src/components/VisualTestPyramid.js';
@@ -14,7 +14,7 @@ import { filterMatrixRows, serializeMatrixCsv, serializeMatrixJson } from '../..
  * - 関連文書: TC-0029, REQ-0013, REQ-0014, REQ-0015, SPEC-0013, SPEC-0014, SPEC-0015
  */
 test('TC-0029: Web UIコンポーネント間連携（モーダル履歴・ピラミッド連動・フィルターエクスポート）の外部結合検証', () => {
-  const { graph, report } = buildTraceWeaveReport({ docsDir: repositoryPath('docs'), useCache: false });
+  const { graph, report } = buildStratumReport({ docsDir: repositoryPath('docs'), useCache: false });
   let history = appendModalHistory({ history: ['REQ-0013'], index: 0 }, 'REQ-0014');
   history = moveModalHistory(history, 'back');
   assert.equal(history.history[history.index], 'REQ-0013');

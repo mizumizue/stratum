@@ -309,7 +309,7 @@ export interface DecisionsCatalog {
   totalCount: number;
 }
 
-export interface TraceWeaveReport {
+export interface StratumDataPayload {
   generatedAt: string;
   summary: {
     totalNeeds: number;

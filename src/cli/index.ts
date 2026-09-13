@@ -5,7 +5,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { checkDocs } from '../application/check-docs.js';
-import { buildTraceWeaveReport } from '../application/build-report.js';
+import { buildStratumReport } from '../application/build-report.js';
 import { ConsoleReporter } from '../infrastructure/reporters/ConsoleReporter.js';
 import { MarkdownReporter } from '../infrastructure/reporters/MarkdownReporter.js';
 import { TestRunnerRegistry } from '../core/testing/TestRunnerRegistry.js';
@@ -89,7 +89,7 @@ program
   .option('-o, --out <file>', 'Output file path (optional)')
   .action((options) => {
     const docsDir = resolveDocsDir(options.docs);
-    const { report } = buildTraceWeaveReport({ docsDir });
+    const { report } = buildStratumReport({ docsDir });
 
     if (options.format === 'json') {
       const output = JSON.stringify(report, null, 2);
@@ -121,7 +121,7 @@ program
   .option('-o, --out <file>', 'Output file path (optional)')
   .action((options) => {
     const docsDir = resolveDocsDir(options.docs);
-    const { report } = buildTraceWeaveReport({ docsDir });
+    const { report } = buildStratumReport({ docsDir });
 
     if (options.format === 'json') {
       const output = JSON.stringify(report.matrix, null, 2);
@@ -168,7 +168,7 @@ program
   .option('-o, --out <file>', 'Output file path (optional)')
   .action((options) => {
     const docsDir = resolveDocsDir(options.docs);
-    const { nodes } = buildTraceWeaveReport({ docsDir });
+    const { nodes } = buildStratumReport({ docsDir });
     const analyses = TestCaseInputAnalyzer.analyzeAll(nodes);
     const summary = TestCaseInputAnalyzer.summarize(analyses);
 
@@ -216,7 +216,7 @@ program
   .option('-o, --out <file>', 'Output file path (optional)')
   .action((options) => {
     const docsDir = resolveDocsDir(options.docs);
-    const { report } = buildTraceWeaveReport({ docsDir });
+    const { report } = buildStratumReport({ docsDir });
     const catalog = report.catalog || DecisionsCatalogBuilder.build(report.nodes || []);
     const filtered = DecisionsCatalogBuilder.filter(catalog, {
       kind: options.kind,
@@ -282,7 +282,7 @@ program
   .option('-o, --out <file>', 'Output file path (optional)')
   .action((options) => {
     const docsDir = resolveDocsDir(options.docs);
-    const { report } = buildTraceWeaveReport({ docsDir });
+    const { report } = buildStratumReport({ docsDir });
     const catalog = report.catalog || DecisionsCatalogBuilder.build(report.nodes || []);
 
     if (options.format === 'json') {
@@ -313,7 +313,7 @@ program
       fs.mkdirSync(outDir, { recursive: true });
     }
 
-    const { report } = buildTraceWeaveReport({ docsDir });
+    const { report } = buildStratumReport({ docsDir });
     const dataJson = JSON.stringify(report);
     fs.writeFileSync(path.join(outDir, 'data.json'), dataJson, 'utf-8');
 
@@ -372,7 +372,7 @@ program
 
       if (url === '/api/data') {
         try {
-          const { report } = buildTraceWeaveReport({ docsDir });
+          const { report } = buildStratumReport({ docsDir });
           res.writeHead(200, {
             'Content-Type': 'application/json',
           });
@@ -440,7 +440,7 @@ program
         fs.createReadStream(targetFile).pipe(res);
       } else {
         // Fallback: If web dist is not built, return dynamic dashboard HTML
-        const { report } = buildTraceWeaveReport({ docsDir });
+        const { report } = buildStratumReport({ docsDir });
         res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
         res.end(generateFallbackHtml(report));
       }
