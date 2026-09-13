@@ -25,7 +25,6 @@ stratum/
 │
 ├── agents/                 # 【ForgOS 工程手順の正本】
 │   ├── modes/              # Spike, Specify, Implement, Audit, Steward
-│   ├── pipeline/           # map, cut, promote, spec-source
 │   ├── engineering/        # TDD, assure
 │   └── policy/             # 共通ポリシー (framework.md 等)
 │

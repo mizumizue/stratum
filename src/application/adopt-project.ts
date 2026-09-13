@@ -5,8 +5,8 @@ import { fileURLToPath } from 'node:url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-// TRACEWEAVE_ROOT points to repo root (traceweave/)
-const TRACEWEAVE_ROOT = path.resolve(__dirname, '../../');
+// STRATUM_ROOT points to repo root (stratum/)
+const STRATUM_ROOT = path.resolve(__dirname, '../../');
 
 export type AdoptionMode = 'overlay' | 'restructure';
 
@@ -261,7 +261,7 @@ ${projectName} の開発・保守において、機能追加やリファクタ�
 仕様と実装・テストが個別に管理されることで、実装された振る舞いがどの要件を満たしているか、また重要な仕様に対して十分なテストが存在するかを客観的に証明・検証することが困難である。
 
 ### Desired Outcome
-V字モデルに基づくトレーサビリティを Git 管理されたドキュメントで確立し、TraceWeave を通じて要件ごとの充足度とテスト地層密度を自動診断できるようにする。
+V字モデルに基づくトレーサビリティを Git 管理されたドキュメントで確立し、Stratum を通じて要件ごとの充足度とテスト地層密度を自動診断できるようにする。
 `,
 
     'docs/actors/ACT-0001.md': `---
@@ -518,7 +518,7 @@ ${projectName} は、主要ユースケース（UC-0001）を実現し、安定�
 - **Out-of-Scope**: リポジトリ構成、依存関係管理、開発プロセスツール。
 
 ## 3. ドキュメント体系
-TraceWeave V字モデル（NEED -> REQ -> SPEC -> DSN, ACT, UC, QA, TC, ADR）に準拠して管理する。
+Stratum V字モデル（NEED -> REQ -> SPEC -> DSN, ACT, UC, QA, TC, ADR）に準拠して管理する。
 `,
   };
 }
@@ -631,12 +631,12 @@ exit 1
 }
 
 function generateCursorRules(): Record<string, string> {
-  const schemaPath = path.join(TRACEWEAVE_ROOT, '.cursor', 'rules', 'docs-document-schema.mdc');
-  const workflowPath = path.join(TRACEWEAVE_ROOT, '.cursor', 'rules', 'implementation-workflow.mdc');
+  const schemaPath = path.join(STRATUM_ROOT, '.cursor', 'rules', 'docs-document-schema.mdc');
+  const workflowPath = path.join(STRATUM_ROOT, '.cursor', 'rules', 'implementation-workflow.mdc');
 
   const schemaRule = fs.existsSync(schemaPath)
     ? fs.readFileSync(schemaPath, 'utf-8')
-    : '# TraceWeave Documentation Schema\n';
+    : '# Stratum Documentation Schema\n';
   const workflowRule = fs.existsSync(workflowPath)
     ? fs.readFileSync(workflowPath, 'utf-8')
     : '# Implementation Workflow\n';
