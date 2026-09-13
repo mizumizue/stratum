@@ -180,6 +180,21 @@ async function runTests(): Promise<void> {
         });
         fs.writeFileSync(distWebJson, JSON.stringify(report), 'utf-8');
         console.log(`\x1b[32m✔ Synchronized latest test outcomes to Web Dashboard data: ${distWebJson}\x1b[0m\n`);
+
+        const distWebHtml = path.join(ROOT, 'src', 'web', 'dist', 'index.html');
+        if (fs.existsSync(distWebHtml)) {
+          let html = fs.readFileSync(distWebHtml, 'utf-8');
+          const safeJson = JSON.stringify(report).replace(/</g, '\\u003c');
+          const scriptTag = `<script id="stratum-inline-data">window.__STRATUM_DATA__ = ${safeJson};</script>`;
+          if (html.includes('id="stratum-inline-data"')) {
+            html = html.replace(/<script id="stratum-inline-data">[\s\S]*?<\/script>/, scriptTag);
+          } else if (html.includes('</head>')) {
+            html = html.replace('</head>', `    ${scriptTag}\n  </head>`);
+          } else {
+            html = `${scriptTag}\n${html}`;
+          }
+          fs.writeFileSync(distWebHtml, html, 'utf-8');
+        }
       } catch (err: any) {
         console.warn(`\x1b[33m⚠ Failed to auto-sync data.json: ${err.message}\x1b[0m\n`);
       }

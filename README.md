@@ -184,3 +184,26 @@ stratum/
 - **充足（緑）**: 80% 以上
 - **一部充足（黄）**: 50% 以上 80% 未満
 - **未充足（赤）**: 50% 未満（未テスト等）
+
+---
+
+## 6. Web ダッシュボード & GitHub Pages デモ
+
+Stratum は V-Model トレーサビリティマトリクスや地層密度、テストピラミッドを直感的に閲覧できる静的 Web ダッシュボード（React + Vite）を備えています。
+
+### ローカルでの閲覧
+```bash
+# プレビューサーバーの起動（3000ポートで即時配信）
+./bin/stratum serve --port 3000
+
+# または静的自己完結型アセット（HTML/JS/CSS/data.json）のビルド
+./bin/stratum build --out ./src/web/dist
+```
+
+### GitHub Pages でのデモ公開
+本リポジトリには GitHub Actions による自動デプロイワークフロー（`.github/workflows/deploy-pages.yml`）が含まれています。`main` ブランチへのプッシュまたは手動実行（`workflow_dispatch`）により、型検証・ドキュメント監査・全テストを実行して最新の客観的検証レポートを反映したダッシュボードが自動デプロイされます。
+
+1. GitHub リポジトリの **Settings** → **Pages** にアクセスします。
+2. **Build and deployment** の **Source** で **「GitHub Actions」** を選択します。
+3. `main` ブランチへ変更がマージされると（または Actions タブから手動実行すると）、デモページが自動公開されます。
+   - 公開 URL: `https://<owner>.github.io/<repo>/` (例: `https://mizumizue.github.io/stratum/`)

@@ -134,6 +134,7 @@ stratum/
 ./bin/stratum check
 ./bin/stratum report
 ./bin/stratum matrix
+./bin/stratum build
 ./bin/stratum serve --port 3000
 
 # src/ 配下での直接ビルド・テスト

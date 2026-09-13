@@ -1,0 +1,273 @@
+{
+  "generatedAt": "2026-09-13T07:46:01.628Z",
+  "totalTests": 65,
+  "passedCount": 65,
+  "failedCount": 0,
+  "skippedCount": 0,
+  "results": {
+    "TC-0026": {
+      "testCaseId": "TC-0026",
+      "status": "passed",
+      "durationMs": 361.026171,
+      "testTitle": "TC-0026: buildStratumReport - レポート統合・静的データペイロード生成およびCLI配備の外部結合検証",
+      "outputLog": "# Subtest: TC-0026: buildStratumReport - レポート統合・静的データペイロード生成およびCLI配備の外部結合検証\nok 1 - TC-0026: buildStratumReport - レポート統合・静的データペイロード生成およびCLI配備の外部結合検証\n---\nduration_ms: 361.026171\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0005": {
+      "testCaseId": "TC-0005",
+      "status": "passed",
+      "durationMs": 803.529601,
+      "testTitle": "TC-0005: checkDocs - strictモードにおいて欠落リンクを検出し不合格と判定すること",
+      "outputLog": "# Subtest: TC-0005: checkDocs - strictモードにおいて欠落リンクを検出し不合格と判定すること\nok 4 - TC-0005: checkDocs - strictモードにおいて欠落リンクを検出し不合格と判定すること\n---\nduration_ms: 803.529601\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0030": {
+      "testCaseId": "TC-0030",
+      "status": "passed",
+      "durationMs": 0.625316,
+      "testTitle": "TC-0030: クリーンルート規約およびbinラッパー構成の外部結合検証",
+      "outputLog": "# Subtest: TC-0030: クリーンルート規約およびbinラッパー構成の外部結合検証\nok 6 - TC-0030: クリーンルート規約およびbinラッパー構成の外部結合検証\n---\nduration_ms: 0.625316\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0011": {
+      "testCaseId": "TC-0011",
+      "status": "passed",
+      "durationMs": 273.090148,
+      "testTitle": "TC-0011: CLI serve - 外部HTTP APIが対話型テスト実行結果を返すこと",
+      "outputLog": "# Subtest: TC-0011: CLI serve - 外部HTTP APIが対話型テスト実行結果を返すこと\nok 9 - TC-0011: CLI serve - 外部HTTP APIが対話型テスト実行結果を返すこと\n---\nduration_ms: 273.090148\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0028": {
+      "testCaseId": "TC-0028",
+      "status": "passed",
+      "durationMs": 0.786063,
+      "testTitle": "TC-0028: Webフロントエンド開発資材のカプセル化・ビルド出力設定およびCLIアセット解決の外部結合検証",
+      "outputLog": "# Subtest: TC-0028: Webフロントエンド開発資材のカプセル化・ビルド出力設定およびCLIアセット解決の外部結合検証\nok 10 - TC-0028: Webフロントエンド開発資材のカプセル化・ビルド出力設定およびCLIアセット解決の外部結合検証\n---\nduration_ms: 0.786063\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0003": {
+      "testCaseId": "TC-0003",
+      "status": "passed",
+      "durationMs": 1.511314,
+      "testTitle": "TC-0003: BalanceAnalyzer - 外部パラメータセットの全診断パターンが実行結果と一致すること",
+      "outputLog": "# Subtest: TC-0003: BalanceAnalyzer - 外部パラメータセットの全診断パターンが実行結果と一致すること\nok 13 - TC-0003: BalanceAnalyzer - 外部パラメータセットの全診断パターンが実行結果と一致すること\n---\nduration_ms: 1.511314\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0031": {
+      "testCaseId": "TC-0031",
+      "status": "passed",
+      "durationMs": 318.033888,
+      "testTitle": "TC-0031: DecisionsCatalogBuilder - 主要種別集約・相互参照（ACT-UC/DSN-ADR）解決およびCLIフィルタリングの外部結合検証",
+      "outputLog": "# Subtest: TC-0031: DecisionsCatalogBuilder - 主要種別集約・相互参照（ACT-UC/DSN-ADR）解決およびCLIフィルタリングの外部結合検証\nok 14 - TC-0031: DecisionsCatalogBuilder - 主要種別集約・相互参照（ACT-UC/DSN-ADR）解決およびCLIフィルタリングの外部結合検証\n---\nduration_ms: 318.033888\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0017": {
+      "testCaseId": "TC-0017",
+      "status": "passed",
+      "durationMs": 26.916597,
+      "testTitle": "TC-0017: DecisionsCatalogBuilder - 実際のdocsディレクトリを読み込み、全種別のカタログ集約と相互参照解決が決定論的に成功すること",
+      "outputLog": "# Subtest: TC-0017: DecisionsCatalogBuilder - 実際のdocsディレクトリを読み込み、全種別のカタログ集約と相互参照解決が決定論的に成功すること\nok 16 - TC-0017: DecisionsCatalogBuilder - 実際のdocsディレクトリを読み込み、全種別のカタログ集約と相互参照解決が決定論的に成功すること\n---\nduration_ms: 26.916597\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0001": {
+      "testCaseId": "TC-0001",
+      "status": "passed",
+      "durationMs": 0.216733,
+      "testTitle": "TC-0001: TraceGraph - 依存先を持たない孤立ノード（orphan）および未存在ノードを参照する欠落リンクを正しく検知できること",
+      "outputLog": "# Subtest: TC-0001: TraceGraph - 依存先を持たない孤立ノード（orphan）および未存在ノードを参照する欠落リンクを正しく検知できること\nok 19 - TC-0001: TraceGraph - 依存先を持たない孤立ノード（orphan）および未存在ノードを参照する欠落リンクを正しく検知できること\n---\nduration_ms: 0.216733\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0007": {
+      "testCaseId": "TC-0007",
+      "status": "passed",
+      "durationMs": 4.240587,
+      "testTitle": "TC-0007: TestCaseInputAnalyzer - Rule 1: 外部環境依存（E2E・手動・シナリオ等）を持つテストケースが入力変更不可として除外されること",
+      "outputLog": "# Subtest: TC-0007: TestCaseInputAnalyzer - Rule 1: 外部環境依存（E2E・手動・シナリオ等）を持つテストケースが入力変更不可として除外されること\nok 22 - TC-0007: TestCaseInputAnalyzer - Rule 1: 外部環境依存（E2E・手動・シナリオ等）を持つテストケースが入力変更不可として除外されること\n---\nduration_ms: 4.240587\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0032": {
+      "testCaseId": "TC-0032",
+      "status": "passed",
+      "durationMs": 33.307665,
+      "testTitle": "TC-0032: TraceabilityGraphBuilder - 階層レイアウト計算・上流下流パス探索および種別除外・詳細インスペクター連動の外部結合検証",
+      "outputLog": "# Subtest: TC-0032: TraceabilityGraphBuilder - 階層レイアウト計算・上流下流パス探索および種別除外・詳細インスペクター連動の外部結合検証\nok 44 - TC-0032: TraceabilityGraphBuilder - 階層レイアウト計算・上流下流パス探索および種別除外・詳細インスペクター連動の外部結合検証\n---\nduration_ms: 33.307665\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0033": {
+      "testCaseId": "TC-0033",
+      "status": "passed",
+      "durationMs": 163.613487,
+      "testTitle": "TC-0033: PortManager - 先行プロセスが専有するポートを強制終了して解放し、再起動可能にできること",
+      "outputLog": "# Subtest: TC-0033: PortManager - 先行プロセスが専有するポートを強制終了して解放し、再起動可能にできること\nok 47 - TC-0033: PortManager - 先行プロセスが専有するポートを強制終了して解放し、再起動可能にできること\n---\nduration_ms: 163.613487\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0025": {
+      "testCaseId": "TC-0025",
+      "status": "passed",
+      "durationMs": 1.696329,
+      "testTitle": "TC-0025: SufficiencyScorer & BalanceAnalyzer - 有向グラフからの重要度別スコアリングと工程地層密度・ピラミッド診断の内部結合検証",
+      "outputLog": "# Subtest: TC-0025: SufficiencyScorer & BalanceAnalyzer - 有向グラフからの重要度別スコアリングと工程地層密度・ピラミッド診断の内部結合検証\nok 31 - TC-0025: SufficiencyScorer & BalanceAnalyzer - 有向グラフからの重要度別スコアリングと工程地層密度・ピラミッド診断の内部結合検証\n---\nduration_ms: 1.696329\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0002": {
+      "testCaseId": "TC-0002",
+      "status": "passed",
+      "durationMs": 0.173645,
+      "testTitle": "TC-0002: SufficiencyScorer - 中重要度（medium）要件に対して重要度別の重み付けルールが正しく適用されること",
+      "outputLog": "# Subtest: TC-0002: SufficiencyScorer - 中重要度（medium）要件に対して重要度別の重み付けルールが正しく適用されること\nok 34 - TC-0002: SufficiencyScorer - 中重要度（medium）要件に対して重要度別の重み付けルールが正しく適用されること\n---\nduration_ms: 0.173645\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0010": {
+      "testCaseId": "TC-0010",
+      "status": "passed",
+      "durationMs": 0.376142,
+      "testTitle": "TC-0010: TestRunnerRegistry - 外部環境依存テスト（非単純I/O）のUI実行除外および不一致検知が正しく行われること",
+      "outputLog": "# Subtest: TC-0010: TestRunnerRegistry - 外部環境依存テスト（非単純I/O）のUI実行除外および不一致検知が正しく行われること\nok 39 - TC-0010: TestRunnerRegistry - 外部環境依存テスト（非単純I/O）のUI実行除外および不一致検知が正しく行われること\n---\nduration_ms: 0.376142\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0018": {
+      "testCaseId": "TC-0018",
+      "status": "passed",
+      "durationMs": 32.594553,
+      "testTitle": "TC-0018: トレーサビリティグラフ - レイアウトと選択ノードのハイライト契約検証",
+      "outputLog": "# Subtest: TC-0018: トレーサビリティグラフ - レイアウトと選択ノードのハイライト契約検証\nok 70 - TC-0018: トレーサビリティグラフ - レイアウトと選択ノードのハイライト契約検証\n---\nduration_ms: 32.594553\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0027": {
+      "testCaseId": "TC-0027",
+      "status": "passed",
+      "durationMs": 15.589949,
+      "testTitle": "TC-0027: DocParser & SQLiteCache - 詳細セクション抽出・テストケース実測値保持およびキャッシュ永続化の外部結合検証",
+      "outputLog": "# Subtest: TC-0027: DocParser & SQLiteCache - 詳細セクション抽出・テストケース実測値保持およびキャッシュ永続化の外部結合検証\nok 45 - TC-0027: DocParser & SQLiteCache - 詳細セクション抽出・テストケース実測値保持およびキャッシュ永続化の外部結合検証\n---\nduration_ms: 15.589949\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0004": {
+      "testCaseId": "TC-0004",
+      "status": "passed",
+      "durationMs": 4.377577,
+      "testTitle": "TC-0004: DocParser - ディレクトリ全体のパースにおいてSQLiteキャッシュが機能し高速化されること",
+      "outputLog": "# Subtest: TC-0004: DocParser - ディレクトリ全体のパースにおいてSQLiteキャッシュが機能し高速化されること\nok 49 - TC-0004: DocParser - ディレクトリ全体のパースにおいてSQLiteキャッシュが機能し高速化されること\n---\nduration_ms: 4.377577\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0008": {
+      "testCaseId": "TC-0008",
+      "status": "passed",
+      "durationMs": 0.664229,
+      "testTitle": "TC-0008: DocParser - test_case文書の実測値（actual_results）、合否ステータス（execution_status）、および各Markdownセクションを正しくパースできること",
+      "outputLog": "# Subtest: TC-0008: DocParser - test_case文書の実測値（actual_results）、合否ステータス（execution_status）、および各Markdownセクションを正しくパースできること\nok 50 - TC-0008: DocParser - test_case文書の実測値（actual_results）、合否ステータス（execution_status）、および各Markdownセクションを正しくパースできること\n---\nduration_ms: 0.664229\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0006": {
+      "testCaseId": "TC-0006",
+      "status": "passed",
+      "durationMs": 8.688541,
+      "testTitle": "TC-0006 & TC-0009: Webダッシュボードビルド成果物および実測ペイロード外部契約を検証すること",
+      "outputLog": "# Subtest: TC-0006 & TC-0009: Webダッシュボードビルド成果物および実測ペイロード外部契約を検証すること\nok 53 - TC-0006 & TC-0009: Webダッシュボードビルド成果物および実測ペイロード外部契約を検証すること\n---\nduration_ms: 8.688541\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0009": {
+      "testCaseId": "TC-0009",
+      "status": "passed",
+      "durationMs": 8.688541,
+      "testTitle": "TC-0006 & TC-0009: Webダッシュボードビルド成果物および実測ペイロード外部契約を検証すること",
+      "outputLog": "# Subtest: TC-0006 & TC-0009: Webダッシュボードビルド成果物および実測ペイロード外部契約を検証すること\nok 53 - TC-0006 & TC-0009: Webダッシュボードビルド成果物および実測ペイロード外部契約を検証すること\n---\nduration_ms: 8.688541\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0012": {
+      "testCaseId": "TC-0012",
+      "status": "passed",
+      "durationMs": 0.152028,
+      "testTitle": "TC-0012: CircularGauge - スコア閾値（80%以上: teal、50%〜79%: amber、50%未満: rose）に応じた配色定義が正しく返されること",
+      "outputLog": "# Subtest: TC-0012: CircularGauge - スコア閾値（80%以上: teal、50%〜79%: amber、50%未満: rose）に応じた配色定義が正しく返されること\nok 55 - TC-0012: CircularGauge - スコア閾値（80%以上: teal、50%〜79%: amber、50%未満: rose）に応じた配色定義が正しく返されること\n---\nduration_ms: 0.152028\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0013": {
+      "testCaseId": "TC-0013",
+      "status": "passed",
+      "durationMs": 30.941248,
+      "testTitle": "TC-0013: CircularGauge - ダッシュボード全体の各指標（全体スコア、要件行、テスト層カバレッジ）への円形ゲージ統合およびトレーサビリティの検証",
+      "outputLog": "# Subtest: TC-0013: CircularGauge - ダッシュボード全体の各指標（全体スコア、要件行、テスト層カバレッジ）への円形ゲージ統合およびトレーサビリティの検証\nok 56 - TC-0013: CircularGauge - ダッシュボード全体の各指標（全体スコア、要件行、テスト層カバレッジ）への円形ゲージ統合およびトレーサビリティの検証\n---\nduration_ms: 30.941248\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0014": {
+      "testCaseId": "TC-0014",
+      "status": "passed",
+      "durationMs": 0.741616,
+      "testTitle": "TC-0014 & TC-0016: クリーンルート規約 - ルート直下の禁止資材非存在、src/webへの資材カプセル化、およびbin/ラッパー配置の検証",
+      "outputLog": "# Subtest: TC-0014 & TC-0016: クリーンルート規約 - ルート直下の禁止資材非存在、src/webへの資材カプセル化、およびbin/ラッパー配置の検証\nok 57 - TC-0014 & TC-0016: クリーンルート規約 - ルート直下の禁止資材非存在、src/webへの資材カプセル化、およびbin/ラッパー配置の検証\n---\nduration_ms: 0.741616\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0016": {
+      "testCaseId": "TC-0016",
+      "status": "passed",
+      "durationMs": 0.741616,
+      "testTitle": "TC-0014 & TC-0016: クリーンルート規約 - ルート直下の禁止資材非存在、src/webへの資材カプセル化、およびbin/ラッパー配置の検証",
+      "outputLog": "# Subtest: TC-0014 & TC-0016: クリーンルート規約 - ルート直下の禁止資材非存在、src/webへの資材カプセル化、およびbin/ラッパー配置の検証\nok 57 - TC-0014 & TC-0016: クリーンルート規約 - ルート直下の禁止資材非存在、src/webへの資材カプセル化、およびbin/ラッパー配置の検証\n---\nduration_ms: 0.741616\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0020": {
+      "testCaseId": "TC-0020",
+      "status": "passed",
+      "durationMs": 36.742642,
+      "testTitle": "TC-0020: トレーサビリティ連鎖 - REQ-0025 から SPEC-0020 および TC-0020 の追跡関係の検証",
+      "outputLog": "# Subtest: TC-0020: トレーサビリティ連鎖 - REQ-0025 から SPEC-0020 および TC-0020 の追跡関係の検証\nok 60 - TC-0020: トレーサビリティ連鎖 - REQ-0025 から SPEC-0020 および TC-0020 の追跡関係の検証\n---\nduration_ms: 36.742642\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0019": {
+      "testCaseId": "TC-0019",
+      "status": "passed",
+      "durationMs": 29.079762,
+      "testTitle": "TC-0019: トレーサビリティ連鎖 - NEED-0008 から REQ-0023, REQ-0024, SPEC-0019, TC-0019 の双方向追跡の検証",
+      "outputLog": "# Subtest: TC-0019: トレーサビリティ連鎖 - NEED-0008 から REQ-0023, REQ-0024, SPEC-0019, TC-0019 の双方向追跡の検証\nok 64 - TC-0019: トレーサビリティ連鎖 - NEED-0008 から REQ-0023, REQ-0024, SPEC-0019, TC-0019 の双方向追跡の検証\n---\nduration_ms: 29.079762\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0023": {
+      "testCaseId": "TC-0023",
+      "status": "passed",
+      "durationMs": 0.412207,
+      "testTitle": "TC-0023: MatrixView - トレーサビリティデータのCSV・JSON・Markdownシリアライズが正確に行われること",
+      "outputLog": "# Subtest: TC-0023: MatrixView - トレーサビリティデータのCSV・JSON・Markdownシリアライズが正確に行われること\nok 66 - TC-0023: MatrixView - トレーサビリティデータのCSV・JSON・Markdownシリアライズが正確に行われること\n---\nduration_ms: 0.412207\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0021": {
+      "testCaseId": "TC-0021",
+      "status": "passed",
+      "durationMs": 0.132864,
+      "testTitle": "TC-0021: NodeDetailModal - ノードID・ファイルパス・Markdown本文のコピーデータ抽出",
+      "outputLog": "# Subtest: TC-0021: NodeDetailModal - ノードID・ファイルパス・Markdown本文のコピーデータ抽出\nok 69 - TC-0021: NodeDetailModal - ノードID・ファイルパス・Markdown本文のコピーデータ抽出\n---\nduration_ms: 0.132864\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0029": {
+      "testCaseId": "TC-0029",
+      "status": "passed",
+      "durationMs": 39.940941,
+      "testTitle": "TC-0029: Web UIコンポーネント間連携（モーダル履歴・ピラミッド連動・フィルターエクスポート）の外部結合検証",
+      "outputLog": "# Subtest: TC-0029: Web UIコンポーネント間連携（モーダル履歴・ピラミッド連動・フィルターエクスポート）の外部結合検証\nok 71 - TC-0029: Web UIコンポーネント間連携（モーダル履歴・ピラミッド連動・フィルターエクスポート）の外部結合検証\n---\nduration_ms: 39.940941\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0015": {
+      "testCaseId": "TC-0015",
+      "status": "passed",
+      "durationMs": 42.146314,
+      "testTitle": "TC-0015: Web公開契約 - テストピラミッド、ゲージ閾値、エクスポートの検証",
+      "outputLog": "# Subtest: TC-0015: Web公開契約 - テストピラミッド、ゲージ閾値、エクスポートの検証\nok 72 - TC-0015: Web公開契約 - テストピラミッド、ゲージ閾値、エクスポートの検証\n---\nduration_ms: 42.146314\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0024": {
+      "testCaseId": "TC-0024",
+      "status": "passed",
+      "durationMs": 29.328098,
+      "testTitle": "TC-0024: Web UIインタラクティブ機能（モーダル履歴・立体ピラミッド連動・多軸フィルターエクスポート）の総合検証",
+      "outputLog": "# Subtest: TC-0024: Web UIインタラクティブ機能（モーダル履歴・立体ピラミッド連動・多軸フィルターエクスポート）の総合検証\nok 73 - TC-0024: Web UIインタラクティブ機能（モーダル履歴・立体ピラミッド連動・多軸フィルターエクスポート）の総合検証\n---\nduration_ms: 29.328098\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    },
+    "TC-0022": {
+      "testCaseId": "TC-0022",
+      "status": "passed",
+      "durationMs": 0.139759,
+      "testTitle": "TC-0022: VisualTestPyramid - ピラミッド層クリック時に対象工程識別子がコールバックへ渡されること",
+      "outputLog": "# Subtest: TC-0022: VisualTestPyramid - ピラミッド層クリック時に対象工程識別子がコールバックへ渡されること\nok 75 - TC-0022: VisualTestPyramid - ピラミッド層クリック時に対象工程識別子がコールバックへ渡されること\n---\nduration_ms: 0.139759\n...",
+      "executedAt": "2026-09-13T07:46:01.628Z"
+    }
+  }
+}
