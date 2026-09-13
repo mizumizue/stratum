@@ -35,7 +35,7 @@
 
 | 種別 | パス | 説明 |
 |------|------|------|
-| 製品（Product）の実装領域 | `src/` | 製品アプリケーション実装（Clean-Root アーキテクチャ） |
+| 製品（Product）の実装領域 | `src/` | 製品アプリケーション実装（特定アーキテクチャ・設計指針に限定しない） |
 | 製品のための機能: 仕様・設計正本 | `docs/` | V-Model（NEED, REQ, SPEC, DSN, ADR, QA, TC） |
 | テストコード | `tests/` | 単体・結合テストスイート（Vitest） |
 | 開発・品質実行ラッパー | `bin/` | `bin/stratum`, `bin/traceweave` |

@@ -150,7 +150,7 @@ Stratum は **Model Context Protocol (MCP)** を標準サポートしていま�
 ```
 
 #### 実行後の状態
-- ルート直下の `package.json`, `tsconfig.json` 等が `src/` 配下へ移設され、ルートがクリーンに保たれます。
+- ルート直下の言語固有設定（例: `package.json`, `tsconfig.json`, `pyproject.toml`, `Cargo.toml` 等）やソースコードが `src/` 配下へ移設され、ルートがクリーンに保たれます。
 - ルート直下に `DEVELOPER_GUIDE.md`、`SYSTEM_OVERVIEW.md`、`bin/` ラッパーが配備されます。
 - 完全バックアップが `.stratum-backup/<タイムスタンプ>_restructure/` に保存されます。
 
