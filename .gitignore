@@ -12,7 +12,8 @@ dist-web/
 # Cache & database
 .cache/
 .db/
-reports/
+/reports/
+!fixtures/reports/
 *.local
 *.log
 .DS_Store
