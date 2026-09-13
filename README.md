@@ -45,7 +45,16 @@ stratum/
 ├── USER_GUIDE.md           # ユーザーガイド: CLI・Web画面・MCP連携の完全利用マニュアル
 ├── ARCHITECTURE.md         # アーキテクチャ設計原則、レイヤー責務、システム構造図
 ├── DEVELOPER_GUIDE.md      # 開発者ガイド: 文書先行プロセスの流れ・リポジトリ規約
+├── CONTEXT.md              # プロジェクト文脈 & ForgOS 統合コンテキスト
+├── AGENTS.md               # エージェント向けガイダンス
+├── CLAUDE.md               # Claude Code アダプター
 ├── .gitignore              # Git 除外設定（src/node_modules/, src/dist/, .cache/ 等）
+│
+├── agents/                 # 【ForgOS 工程手順の正本】
+│   ├── modes/              # Spike, Specify, Implement, Audit, Steward
+│   ├── pipeline/           # map, cut, promote, spec-source
+│   ├── engineering/        # TDD, assure
+│   └── policy/             # 共通ポリシー (framework.md 等)
 │
 ├── docs/                   # 【製品の決め事】要求・要件・仕様・設計・ADR・品質・テスト
 ├── fixtures/               # テスト用フィクスチャ

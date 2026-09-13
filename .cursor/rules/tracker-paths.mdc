@@ -1,0 +1,14 @@
+---
+description: source/cut などパイプライン経路。正本は agents/pipeline/map/issue-tracker
+alwaysApply: true
+---
+
+# トラッカー／パイプライン経路（Cursor adapter）
+
+**正本:** `agents/policy/tracker-paths.md` および `agents/pipeline/map/issue-tracker.md`。
+
+- `/spec-source` → `specs/source/<feature-slug>/spec.md`（仮仕様。L2/L3 に PRD 丸ごと禁止）
+- `/promote` → Audit 後 `specs/` L2/L3。完了直後に Source 削除。手順: `agents/pipeline/promote/`
+- `/map` → `pbl/`。手順: `agents/pipeline/map/`。issue は原則 PBI から cut
+- `/cut` → `issues/backlog/<feature-slug>-<NN>-<slug>.md`。`Status: backlog`
+- 公開トラッカーと同期するときは **公開側が正**。`Triage:` などリポジトリ専用は公開へ送らない

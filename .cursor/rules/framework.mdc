@@ -1,0 +1,17 @@
+---
+description: ForgOS モード駆動開発と Stratum 品質プロセスの統合ガイドライン
+alwaysApply: true
+---
+
+# ForgOS + Stratum — 工程 OS & 品質規約（Cursor adapter）
+
+**正本:** `agents/policy/framework.md` を読め。以下は要約。
+
+1. **作業開始時はモードを明示する**（Spike / Specify / Implement / Audit / Steward）。
+2. **決め事・仕様の正本は `docs/`**: 要求（NEED）→ 要件（REQ）→ 仕様（SPEC）→ 設計（DSN）→ テストケース（TC）の V-Model 体系を厳格維持する（スキーマ: `docs-document-schema.mdc`）。
+3. **ツールの都合で開発を歪めない**: Stratum は仕様と実装の観測・可視化エンジンであり、TypeScript / アプリケーションコードの自然な配置や実装上の自由度を妨げない。
+4. **実装は TDD**: 単体・結合が緑になるまで完了と言わない。`npm test` による決定論的レポート（`reports/test-results.json`）を証跡とする。
+5. **秘密情報を出さない**: ログ・コミット・仕様・チャット出力に機密情報を含めない。
+6. **エージェント向け手順の正本は `agents/`**: `.cursor/rules` / `.cursor/skills` は adapter。
+7. **品質と地層の可視化**: `./bin/stratum check`、`./bin/stratum report`、`./bin/stratum matrix` を活用し、未テスト要件や工程アンバランスを客観診断する。
+
