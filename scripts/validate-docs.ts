@@ -274,7 +274,7 @@ export function validateDocs(docsDir: string = DOCS_DIR): { passed: boolean; err
           errors.push(`${filePath}: quality_assurance dependency "${dep}" must start with REQ- or SPEC-`);
         }
       }
-      const codePathRegex = /(?:tests?|src)\/[a-zA-Z0-9_\-\/]+\.(?:ts|js|tsx|jsx)/g;
+      const codePathRegex = /(?:tests?|src)\/[a-zA-Z0-9_\-\/]+\.(?:ts|js|tsx|jsx|py|go|rs|cpp|c|h|hpp|java)/g;
       const foundCodePaths = body.match(codePathRegex);
       if (foundCodePaths && foundCodePaths.length > 0) {
         errors.push(

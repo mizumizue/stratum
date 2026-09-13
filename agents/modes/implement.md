@@ -2,6 +2,7 @@
 
 `docs/` に定義された仕様（REQ / SPEC / DSN）に従い、**TDD（テスト駆動開発）** で実装を推進する。
 コードの都合で仕様を曲げたり、ツールの都合で実装構造を歪めたりしない。
+また、**`src/` 配下の製品コードは特定のアーキテクチャや言語に限定されず、プロダクト自体の設計指針には一切関わらない（ADR-0008）**。仕様（What）を充足する最小限のコード（How）を製品自体の設計方針に沿って実装する。
 
 ## 基本原則
 
@@ -30,4 +31,4 @@
 
 ## セッション完了
 
-関連テストがすべて緑（Pass）になり、型検査（`npm --prefix src run typecheck`）およびリント（`npm --prefix src run lint`）に違反がない。
+関連テストがすべて緑（Pass）になり、型検査（`npm --prefix src run typecheck`）およびリント（FWドキュメント: `npm --prefix src run lint`、製品コード: `./bin/stratum lint-product`）に違反がない。

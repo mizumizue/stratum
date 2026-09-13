@@ -1,6 +1,8 @@
 # Claude Code — ForgOS + Stratum adapter
 
-このリポジトリは **ForgOS**（リポジトリ規約 ＋ AI 工程 OS）と **Stratum**（V-Model 品質地層分析プラットフォーム）が統合された開発環境です。**Cursor 第一**ですが、工程手順の正本はツール非依存の [`agents/`](./agents/)、仕様正本は [`docs/`](./docs/) です。
+このリポジトリは、開発フレームワーク（**ForgOS**: AI 工程 OS）と品質地層・トレーサビリティ機能（**Stratum**）の「両軸」で、**製品（`src/`）**を開発・品質保証する環境です。
+トレーサビリティやダッシュボードは製品そのものではなく、製品のための機能です。製品コード（`src/`）は特定のアーキテクチャや言語に限定されず、プロダクト自体の設計指針には一切関わりません（ADR-0008）。
+工程手順の正本はツール非依存の [`agents/`](./agents/)、仕様正本は [`docs/`](./docs/) です。
 
 ## 作業前
 
@@ -24,10 +26,12 @@
 ## Stratum コマンド（品質・トレーサビリティ検証）
 
 ```bash
-./bin/stratum check      # 仕様・リンク整合性の検査
-./bin/stratum report     # 地層密度・ピラミッド診断
-./bin/stratum matrix     # トレーサビリティマトリクス表示
-./bin/stratum serve      # Web ダッシュボードのローカル起動
+./bin/stratum check         # 仕様・リンク整合性の検査
+./bin/stratum report        # 地層密度・ピラミッド診断
+./bin/stratum matrix        # トレーサビリティマトリクス表示
+./bin/stratum lint-product  # 製品コード（src/）の多言語静的解析・リンター
+./bin/stratum ingest-report # 多言語テスト結果（JUnit, TAP, Go JSON等）の取り込み
+./bin/stratum serve         # Web ダッシュボードのローカル起動
 ```
 
 ## 編集の注意

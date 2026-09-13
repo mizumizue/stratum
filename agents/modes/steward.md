@@ -26,6 +26,7 @@
    ```bash
    npm --prefix src run typecheck
    npm --prefix src run lint
+   ./bin/stratum lint-product
    npm --prefix src test
    ```
 

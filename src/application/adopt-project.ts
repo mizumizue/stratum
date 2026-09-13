@@ -418,13 +418,13 @@ links: []
 schema_version: 3
 id: ADR-0001
 kind: decision
-title: TraceWeave によるV字モデルトレーサビリティの導入
+title: Stratum によるV字モデルトレーサビリティの導入
 status: accepted
 created: "${today}"
 updated: "${today}"
 scope: local
 depends_on: []
-tags: [decision, traceweave, traceability, architecture]
+tags: [decision, stratum, traceability, architecture]
 links: [DSN-0001]
 ---
 ## Content
@@ -433,7 +433,7 @@ links: [DSN-0001]
 ${projectName} において、ドキュメントの形骸化を防ぎ、要件から設計・テストケースへの追跡性を Git ネイティブに維持・検証する仕組みが必要となった。
 
 ### Decision
-TraceWeave をプロジェクトに導入し、\`docs/\` 配下の Markdown で V字モデルを管理するとともに、\`traceweave check\` による CI 自動検証を行う。
+Stratum をプロジェクトに導入し、\`docs/\` 配下の Markdown で V字モデルを管理するとともに、\`stratum check\` による CI 自動検証を行う。
 
 ### Consequences
 - 要件とテストケースのリンク関係が可視化され、テスト漏れや孤立した仕様を即座に検知できる。

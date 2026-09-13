@@ -1,6 +1,7 @@
 # Agent 向けメモ (ForgOS + Stratum)
 
-このリポジトリは **ForgOS**（AI 工程 OS スターター）および **Stratum**（V-Model 品質・地層密度分析プラットフォーム）が共存する環境です。
+このリポジトリは、開発フレームワーク（**ForgOS**: AI 工程 OS）と品質地層・トレーサビリティ機能（**Stratum**）の「両軸」で、**製品（`src/`）**を開発・品質保証する環境です。
+トレーサビリティやダッシュボードは製品そのものではなく、製品のための機能です。
 
 作業開始前に [CONTEXT.md](./CONTEXT.md) と [docs/SYSTEM_OVERVIEW.md](./docs/SYSTEM_OVERVIEW.md) を読む。
 
@@ -41,10 +42,13 @@ reports/test-results.json + Stratum 診断  [Audit]
 
 ## 編集制約（要約）
 
+- **src/ は製品、トレーサビリティは製品のための機能**: 開発の本尊は製品コード。トレーサビリティやダッシュボードは製品の品質・契約を支える機能。
+- **特定アーキテクチャ・設計指針に不干渉 (ADR-0008)**: `src/` 配下は特定のアーキテクチャに限定せず、プロダクト自体の内部設計指針には関わらない。言語や設計パターンは自由。
 - **仕様・決め事の正本は `docs/`**: 要求（NEED）→ 要件（REQ）→ 仕様（SPEC）→ 設計（DSN）→ テストケース（TC）の V-Model 体系を維持する。
 - **決め事は What**: How・内部構造・手順は書かない。
-- **ツールの都合で実装構造を歪めない**: Stratum の可視化・分析のために TypeScript 実装の自由度や自然な保守性を妨げない。
+- **ツールの都合で実装構造を歪めない**: Stratum の可視化・分析のために製品実装の自由度や自然な保守性を妨げない（特定言語・アーキテクチャ前提に縛られない）。
 - **実装は TDD**: 単体・結合が緑になるまで完了と言わない。`npm --prefix src test` による決定論的レポートを証跡とする。
+- **FW検査と製品解析の分離 (ADR-0008)**: FW自身のドキュメントスキーマ検査（`validate-docs.ts`）と、製品コード（`src/`）の静的解析・リンター（`ProductLinter` / `./bin/stratum lint-product`）を明確に分離。
 - **客観的事実の検証（ADR-0006）**: `docs/test-cases/` に LLM や人間による作文エビデンスを書き込まない。テスト実行プロセスが出力する `reports/test-results.json` を唯一の合否証拠とする。
 - **秘密情報をログ・コミット・仕様に出さない**。
 
@@ -52,10 +56,10 @@ reports/test-results.json + Stratum 診断  [Audit]
 
 | パス | 役割 |
 |------|------|
-| `docs/` | 製品仕様・設計・決め事・テスト仕様の正本（NEED, REQ, SPEC, DSN, ADR, QA, TC） |
-| `src/` | アプリケーション実装コード（Clean-Root アーキテクチャ） |
+| `src/` | 製品（Product）の実装領域（特定のアーキテクチャ・設計指針に限定しない） |
+| `docs/` | 製品のための機能: 仕様・設計・決め事・テスト仕様の正本（NEED, REQ, SPEC, DSN, ADR, QA, TC） |
 | `tests/` | テストコード（Vitest スイート） |
-| `bin/` | 実行用 CLI ラッパー（`bin/stratum`, `bin/traceweave`） |
-| `agents/` | 工程手順の正本（Mode, Engineering, Policy）。ツール入口は adapter |
+| `bin/` | 開発・品質実行用 CLI ラッパー（`bin/stratum`, `bin/traceweave`） |
+| `agents/` | 開発FW: 工程手順の正本（Mode, Engineering, Policy）。ツール入口は adapter |
 | `reports/` | 機械生成されたテスト実行結果・客観エビデンス（`reports/test-results.json`） |
 | `.cursor/` | Cursor 向けルール（`.cursor/rules/`）およびスキル（`.cursor/skills/`） |

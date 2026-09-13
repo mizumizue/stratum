@@ -19,7 +19,7 @@ Classify and position test inputs, mocks, and fixtures to maximize locality of b
 ### 1. classify (Determine placement target)
 
 Examine the test target and data footprint against the **Placement Matrix**:
-- **Pure unit / logic (UT)**: Keep objects inline in TypeScript. Preserve static typing and autocomplete.
+- **Pure unit / logic (UT)**: Keep objects inline in test code. Preserve static typing and autocomplete.
 - **Table-driven variants**: Place parameter tuples in a local array inside the test file.
 - **File-system / multi-file integration (ITb / ST)**: Target `tests/fixtures/<domain>/`.
 - **Interactive runtime execution (REQ-0008)**: Target `fixtures/test-cases/TC-xxxx.json`.
@@ -77,7 +77,7 @@ tests/fixtures/
 
 ## Failure modes to avoid
 
-- **Universal extraction**: Forcing pure in-memory test objects into external JSON files, destroying TypeScript compile-time type safety.
+- **Universal extraction**: Forcing pure in-memory test objects into external JSON files, destroying compile-time type safety.
 - **Mystery guest pollution**: Hiding values that directly affect assertions inside fixture files, making tests impossible to understand in isolation.
 - **Mutable shared fixtures**: Allowing tests to write directly to files under `tests/fixtures/` without sandboxing via temp directories.
 - **Premature completion**: Leaving test files or directories unverified or leaking temporary files across test runs.

@@ -35,11 +35,11 @@
 
 | 種別 | パス | 説明 |
 |------|------|------|
-| 仕様・設計正本 | `docs/` | V-Model（NEED, REQ, SPEC, DSN, ADR, QA, TC） |
-| アプリケーション実装 | `src/` | TypeScript 実装本体（CLI, Core, Web, Infrastructure, MCP） |
+| 製品（Product）の実装領域 | `src/` | 製品アプリケーション実装（特定アーキテクチャ・設計指針に限定しない） |
+| 製品のための機能: 仕様・設計正本 | `docs/` | V-Model（NEED, REQ, SPEC, DSN, ADR, QA, TC） |
 | テストコード | `tests/` | 単体・結合テストスイート（Vitest） |
-| 実行ラッパー | `bin/` | `bin/stratum`, `bin/traceweave` |
-| 工程手順の正本 | `agents/` | Mode, Engineering, Policy |
+| 開発・品質実行ラッパー | `bin/` | `bin/stratum`, `bin/traceweave` |
+| 開発FW: 工程手順の正本 | `agents/` | Mode, Engineering, Policy |
 | テスト結果・客観エビデンス | `reports/` | `test-results.json`（ADR-0006） |
 
 ## 迷ったら

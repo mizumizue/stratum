@@ -20,13 +20,15 @@
 
 ## ステップ
 
-1. **静的ドキュメント検証を実行する**:
+1. **静的ドキュメント・製品コード静的検査を実行する**:
    ```bash
-   npm --prefix src run lint
+   npm --prefix src run lint       # FW仕様ドキュメントスキーマ検査
+   ./bin/stratum lint-product      # 製品コード（多言語）の静的解析・リンター
    ```
 2. **Stratum 地層・トレーサビリティ分析を実行する**:
    ```bash
-   ./bin/stratum analyze docs
+   ./bin/stratum report
+   ./bin/stratum matrix
    ```
 3. **テスト実行と客観レポート検証を行う**:
    ```bash

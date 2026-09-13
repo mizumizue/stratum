@@ -27,7 +27,9 @@
 
 ## 1. Stratum の概要とコンセプト
 
-**Stratum**（地層）は、現代のソフトウェア開発において形骸化・ブラックボックス化しやすい**「要求〜テストの追跡性（縦糸）」**と**「工程ごとのテスト密度の厚み・薄み（横糸）」**を一目で解読可能にする品質保証ツールです。
+**Stratum**（地層）は、現代のソフトウェア開発において形骸化・ブラックボックス化しやすい**「要求〜テストの追跡性（縦糸）」**と**「工程ごとのテスト密度の厚み・薄み（横糸）」**を一目で解読可能にする品質保証エンジンです。
+
+当開発環境における主役は **`src/` 配下に配置される「製品（プロダクト）」** であり、Stratum は**「製品を正しく・高品質に作るための機能」**として位置づけられています。製品コード（`src/`）は特定のアーキテクチャや言語に限定されず、プロダクト自体の設計指針には一切関わりません（ADR-0008）。可視化ダッシュボードはオプショナルな一手段に過ぎず、開発プロセスや製品コードの配置・保守性を縛ることはありません。
 
 ### 解決する 3 つの課題
 1. **要求〜テストの追跡断片化**:
@@ -178,6 +180,35 @@ Stratum は、CI 自動化から対話的ダッシュボード起動まで豊富
 ```
 ※ 詳細は **[INSTALL_GUIDE.md](INSTALL_GUIDE.md)** および Cursor スキル `stratum-adopt` を参照してください。
 
+### 3.10 `stratum ingest-report` (多言語テスト結果レポートの取り込み)
+JUnit XML (pytest, Maven, Gradle), TAP (libtap, pytest-tap), Go JSON (`go test -json`), 汎用 JSON 形式の多言語テスト結果をパースし、Stratum の客観的テスト結果レポート（`reports/test-results.json`）へ統合・生成します。
+
+```bash
+# pytest や JUnit XML から取り込み
+./bin/stratum ingest-report test-reports/junit.xml
+
+# Go test JSON 出力から取り込み
+go test -json ./... > go-test.json
+./bin/stratum ingest-report go-test.json --format go
+
+# 既存レポートへのマージ更新
+./bin/stratum ingest-report new-results.json --merge
+```
+
+### 3.11 `stratum lint-product` (多言語製品コードの静的解析・リンター実行)
+`src/` 配下に配置された製品コードに対し、言語自動検出（Python, Go, Rust, TypeScript, JavaScript, C/C++, Java 等）またはカスタム設定（`.stratum-lint.json`）に基づいて適切なリンター（ruff, golangci-lint, clippy, eslint 等）を透過的に実行します。
+
+```bash
+# 製品コードのリンターを自動検出して実行
+./bin/stratum lint-product
+
+# 自動修正（対応リンターのみ）
+./bin/stratum lint-product --fix
+
+# 実行予定コマンドの事前確認（ドライラン）
+./bin/stratum lint-product --dry-run
+```
+
 ---
 
 ## 4. MCP サーバー機能ガイド (@src/mcp 徹底解説)
@@ -311,7 +342,7 @@ Cursor から Stratum MCP サーバーを利用するには、プロジェクト
 }
 ```
 
-※ 開発中（TypeScript 直接実行）の場合:
+※ 開発中の直接実行の場合:
 ```json
 {
   "mcpServers": {

@@ -31,7 +31,7 @@
    ```bash
    npm --prefix src run lint
    # または
-   ./bin/stratum analyze docs
+   ./bin/stratum check
    ```
 5. **Implement（実装）へ引き渡す**:
    - 仕様が固まったら、テスト駆動開発（**`/implement`**）へ進む。

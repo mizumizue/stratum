@@ -8,10 +8,13 @@ alwaysApply: true
 **正本:** `agents/policy/framework.md` を読め。以下は要約。
 
 1. **作業開始時はモードを明示する**（Spike / Specify / Implement / Audit / Steward）。
-2. **決め事・仕様の正本は `docs/`**: 要求（NEED）→ 要件（REQ）→ 仕様（SPEC）→ 設計（DSN）→ テストケース（TC）の V-Model 体系を厳格維持する（スキーマ: `docs-document-schema.mdc`）。
-3. **ツールの都合で開発を歪めない**: Stratum は仕様と実装の観測・可視化エンジンであり、TypeScript / アプリケーションコードの自然な配置や実装上の自由度を妨げない。
-4. **実装は TDD**: 単体・結合が緑になるまで完了と言わない。`npm --prefix src test` による決定論的レポート（`reports/test-results.json`）を証跡とする。
-5. **秘密情報を出さない**: ログ・コミット・仕様・チャット出力に機密情報を含めない。
-6. **エージェント向け手順の正本は `agents/`**: `.cursor/rules` / `.cursor/skills` は adapter。
-7. **品質と地層の可視化**: `./bin/stratum check`、`./bin/stratum report`、`./bin/stratum matrix` を活用し、未テスト要件や工程アンバランスを客観診断する。
+2. **src/ は製品、トレーサビリティは製品のための機能**: 開発の本尊は製品コード。Stratum は製品の仕様契約・品質地層・充足度を客観的に保証するための機能であり、製品そのものではない。
+3. **プロダクト設計指針への完全不干渉 (ADR-0008)**: `src/` 配下の製品コードは特定のアーキテクチャ（MVC、レイヤード、DDD等）や言語に限定されず、プロダクト自体の内部設計指針には一切関わらない。
+4. **決め事・仕様の正本は `docs/`**: 要求（NEED）→ 要件（REQ）→ 仕様（SPEC）→ 設計（DSN）→ テストケース（TC）の V-Model 体系を厳格維持する（仕様は What、製品コードは How）。
+5. **ツールの都合で開発を歪めない**: Stratum は仕様と実装の観測・可視化エンジンであり、製品コードの自然な配置や実装上の自由度を妨げない。
+6. **実装は TDD**: 単体・結合が緑になるまで完了と言わない。客観的レポート（`reports/test-results.json`）を証跡とする。
+7. **FW検査と製品コード解析の分離**: FW自身のドキュメントスキーマ検査（`validate-docs.ts`）と、製品コード（`src/`）の静的解析・リンター（`ProductLinter` / `./bin/stratum lint-product`）を明確に分離する。
+8. **秘密情報を出さない**: ログ・コミット・仕様・チャット出力に機密情報を含めない。
+9. **エージェント向け手順の正本は `agents/`**: `.cursor/rules` / `.cursor/skills` は adapter。
+10. **品質と地層の可視化**: `./bin/stratum check`、`./bin/stratum report`、`./bin/stratum matrix` を活用し、未テスト要件や工程アンバランスを客観診断する。
 
