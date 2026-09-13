@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+src/node_modules/
+
+# Build distributions
+dist/
+src/dist/
+src/web/dist/
+dist-web/
+.tmp-build/
+
+# Cache & database
+.cache/
+.db/
+reports/
+*.local
+*.log
+.DS_Store
+
