@@ -1,150 +1,159 @@
 # Stratum (ストラータム / 地層)
 
-> **V-Model Traceability Matrix & Test Stratum Sufficiency Analyzer**  
-> 要求からテストまでの一貫した双方向トレーサビリティと、開発工程（単体・内結・外結・ST・UAT）×手法別の品質充足度・地層密度を可視化する品質保証プラットフォーム。
+> **AI Engineering OS & Quality Stratum Framework**  
+> 確固たる開発プロセス規律（ForgOS モード駆動）と、客観的な品質地層保証（V-Model トレーサビリティ）の「両軸」で製品開発を推進するエンジニアリング・フレームワーク。
 
 ---
 
-## 1. 概要とコンセプト
+## 1. コンセプト：製品開発を支える「開発フレームワーク」×「品質地層機能」の両軸
 
-**Stratum**（地層）は、現代のシステム開発において形骸化・ブラックボックス化しやすい「要求〜テストの追跡性」と「工程ごとのテスト密度の厚み・薄み」を一目で解読可能にするツールです（開発コードネーム: TraceWeave）。
+当リポジトリの主役は **`src/` に配置される「製品（プロダクト）」** です。  
+トレーサビリティやダッシュボードは製品そのものではなく、**「製品を正しく・高品質に作るための機能（品質保証エンジン）」** として位置づけられています。
 
-- **縦糸（トレーサビリティ）**: 要求（NEED）→ 要件（REQ）→ 詳細仕様（SPEC）→ 設計（DSN）→ テストケース（TC）の双方向チェーンを Git ネイティブな Markdown から自動構築。
-- **横糸（工程地層とテストピラミッド）**: テストを 5 大工程（単体・内結・外結・総合・受入）および各種手法（Mock、API Contract、Scenario、E2E等）に分類し、どの層が厚く・薄いか、結合テストの空洞化や E2E 過剰偏重が起きていないかを即時診断。
-- **完全ドッグフーディング**: Stratum 自身も本スキーマに則って自己定義されており、自分自身のトレーサビリティと品質を Stratum ダッシュボードで可視化しています。
-- **完全な後方互換性**: 既存の `traceweave` コマンドや設定はエイリアスとして完全サポートされています。
+AIエージェントと人間が協調して製品を開発するために、本フレームワークは以下の**「両軸」**を提供します。
+
+```text
+┌────────────────────────────────────────────────────────────────────────┐
+│                        【製品 (Product)】 src/                         │
+│                  アプリケーション本体・ビジネスロジック                │
+└───────────────────▲────────────────────────────────▲───────────────────┘
+                    │                                │
+    ┌───────────────┴──────────────┐ ┌───────────────┴──────────────┐
+    │  【軸1: 開発フレームワーク】  │ │   【軸2: 品質地層・追跡機能】   │
+    │      AI 工程 OS (ForgOS)     │ │    V-Model エンジン (Stratum)    │
+    │  - 5大開発モード (Spike/...) │ │  - 要求〜テスト追跡 (docs/)  │
+    │  - What vs How の分離        │ │  - 5大工程の地層密度診断     │
+    │  - TDD (テスト駆動開発)      │ │  - 客観的テストエビデンス    │
+    └──────────────────────────────┘ └──────────────────────────────┘
+```
+
+### 軸1: 開発フレームワーク（AI 工程 OS / ForgOS）
+- **モード駆動開発（Mode-Driven）**:
+  `Spike`（仮説検証）→ `Specify`（仕様先行）→ `Implement`（TDD実装）→ `Audit`（乖離・地層点検）→ `Steward`（規約保守）の5大公式入口により、AIエージェントと開発者の責務境界・開発リズムを統制。
+- **What vs How の厳格分離**:
+  仕様（`docs/`）にビジネスルール・受入基準（What）を定め、実装（`src/`）に内部構造（How）を閉じる。
+- **TDD（テスト駆動開発）**:
+  単体・結合テストが緑になるまで完了とみなさない規律を徹底。
+
+### 軸2: 品質地層・トレーサビリティ機能（Stratum Quality Engine）
+- **縦糸（V-Model トレーサビリティ）**:
+  要求（NEED）→ 要件（REQ）→ 詳細仕様（SPEC）→ 設計（DSN）→ テストケース（TC）の双方向チェーンを Git ネイティブな Markdown から自動構築。
+- **横糸（工程地層密度 & ピラミッド健全性診断）**:
+  テストを 5 大工程（単体・内結・外結・総合・受入）に分類し、どの層が厚く・薄いか、結合テストの空洞化や E2E 過剰偏重が起きていないかを機械判定。
+- **客観的事実の検証（ADR-0006）**:
+  LLMの作文による形骸化エビデンスを排除し、決定論的なテストレポート（`reports/test-results.json`）を唯一の合格証跡とする。
+- **非侵襲な観測性**:
+  トレーサビリティや可視化の都合で製品コードの構成・自由度を縛らない。
 
 ---
 
-## 2. 特徴
+## 2. リポジトリ全体配置マップ
 
-1. **Git ネイティブ & ポータブル**:
-   - `docs/` 配下の Markdown（YAML フロントマター）が唯一の正本（Single Source of Truth）。
-   - 外部 DB サーバー不要。リポジトリ単体で完結し、CI や開発者の手元で即座に動作。
-2. **高速・軽量・クリーンアーキテクチャ**:
-   - Pure TypeScript Core（外部依存ゼロ）により、単体テストがミリ秒で実行。
-   - `better-sqlite3` キャッシュにより、大量ドキュメントの差分パースも超高速。
-   - **React + Vite** によるダッシュボード（ビルド時間 1〜3 秒、完全な静的アセット出力）。
-3. **チーム開発 & CI/CD ファースト**:
-   - `stratum check` でプルリクエスト時にリンク切れ、循環参照、重要要件のテスト欠落を自動検知してガード。
-   - `stratum build` で生成される静的 HTML を GitHub Pages や社内サーバーに置くだけで、チーム全員（エンジニア・QA・PM）がブラウザで閲覧可能。
-4. **オプショナルな MCP 拡張**:
-   - Cursor などの AI エージェント連携は `stratum mcp` という薄いサブコマンドとして分離。個人環境に密結合させません。
-5. **クリーンなリポジトリ構造 & 完全カプセル化 (lucid 思想準拠)**:
-   - ルート直下にはガバナンス・全体構成マップ・実行用ラッパー（`bin/`）のみを最前面に配置。
-   - `node_modules`、`dist`、ビルド設定・依存関係（`package.json`, `tsconfig.json`）はすべて `src/` 配下に完全カプセル化。
-
----
-
-## 3. リポジトリ全体配置マップ
+製品（`src/`）、開発FW（`agents/`）、品質機能（`docs/`, `bin/`）がクリーンルート規約（lucid 思想）に沿って分離・配置されています。ダッシュボード等の特定 UI に開発全体が引っ張られることはありません。
 
 ```text
 stratum/
-├── README.md               # 製品概要、全体構成マップ、クイックスタート
-├── INSTALL_GUIDE.md        # インストール & 導入ガイド: 初期セットアップ・外部プロジェクト適用
-├── USER_GUIDE.md           # ユーザーガイド: CLI・Web画面・MCP連携の完全利用マニュアル
+├── README.md               # プロジェクト概要、全体構成マップ、クイックスタート
+├── DEVELOPER_GUIDE.md      # 開発者ガイド: モード駆動開発の流れ・規約・文書先行プロセス
 ├── ARCHITECTURE.md         # アーキテクチャ設計原則、レイヤー責務、システム構造図
-├── DEVELOPER_GUIDE.md      # 開発者ガイド: 文書先行プロセスの流れ・リポジトリ規約
 ├── CONTEXT.md              # プロジェクト文脈 & ForgOS 統合コンテキスト
-├── AGENTS.md               # エージェント向けガイダンス
+├── AGENTS.md               # AI エージェント向け運用ガイダンス・モード早見
 ├── CLAUDE.md               # Claude Code アダプター
+├── INSTALL_GUIDE.md        # インストール & 導入ガイド: 初期セットアップ・外部プロジェクト適用
+├── USER_GUIDE.md           # ユーザーガイド: CLI・MCP連携・機能マニュアル
 ├── .gitignore              # Git 除外設定（src/node_modules/, src/dist/, .cache/ 等）
 │
-├── agents/                 # 【ForgOS 工程手順の正本】
-│   ├── modes/              # Spike, Specify, Implement, Audit, Steward
-│   ├── engineering/        # TDD, assure
-│   └── policy/             # 共通ポリシー (framework.md 等)
+├── agents/                 # 【開発FW: AI 工程 OS の正本】
+│   ├── modes/              # 5大開発モード (Spike, Specify, Implement, Audit, Steward)
+│   ├── engineering/        # エンジニアリング指針 (TDD, Assure)
+│   └── policy/             # 共通規約 (framework.md, governance-immutable.md 等)
 │
-├── docs/                   # 【製品の決め事】要求・要件・仕様・設計・ADR・品質・テスト
-├── fixtures/               # テスト用フィクスチャ
-├── scripts/                # 運用・検証スクリプト (validate-docs.ts, test.sh 等)
-├── tests/                  # テストスイート
-├── bin/                    # 【透過実行ラッパースクリプト】
-│   ├── stratum             # POSIX bash ラッパー (主コマンド)
+├── docs/                   # 【品質機能: V-Model 仕様・設計・決め事の正本】
+│   ├── needs/              # 要求定義 (NEED-*)
+│   ├── requirements/       # 要件定義 (REQ-*)
+│   ├── specifications/     # 詳細仕様・外部契約 (SPEC-*)
+│   ├── design/             # アーキテクチャ・詳細設計 (DSN-*)
+│   ├── decisions/          # 意思決定ログ / ADR (ADR-*)
+│   ├── actors/             # アクター定義 (ACT-*)
+│   ├── usecases/           # ユースケース (UC-*)
+│   ├── quality/            # 品質基準・検証方針 (QA-*)
+│   └── test-cases/         # 個別テストケース仕様 (TC-*)
+│
+├── bin/                    # 【開発・品質実行ラッパースクリプト】
+│   ├── stratum             # 統合 CLI ラッパー (check, report, matrix, adopt 等)
 │   ├── stratum.cmd         # Windows cmd ラッパー
 │   ├── stratum.ps1         # Windows PowerShell ラッパー
-│   ├── traceweave          # 後方互換性 bash ラッパー (エイリアス)
-│   ├── traceweave.cmd      # 後方互換性 cmd ラッパー
-│   └── traceweave.ps1      # 後方互換性 PowerShell ラッパー
+│   └── traceweave*         # 後方互換性エイリアスラッパー
 │
-└── src/                    # 【アプリケーション実装・依存・成果物完全集約】
-    ├── package.json        # 依存関係・スクリプト定義
+├── tests/                  # テストスイート（単体・結合・E2E）
+├── fixtures/               # テスト用静的フィクスチャ
+├── scripts/                # 運用・検証スクリプト (validate-docs.ts, adopt-stratum.ts 等)
+├── reports/                # 機械生成された客観テストレポート (test-results.json)
+│
+└── src/                    # 【製品（Product）の実装領域】
+    ├── package.json        # 製品・プロジェクト依存関係・スクリプト定義
     ├── tsconfig.json       # TypeScript 設定
     ├── node_modules/       # 依存パッケージ群（.gitignore 対象）
     ├── dist/               # コンパイル済み成果物（.gitignore 対象）
-    ├── core/               # 純粋 TypeScript コア（外部依存ゼロ）
-    ├── application/        # ユースケースオーケストレーション
-    ├── infrastructure/     # ファイル I/O・SQLite キャッシュ・レポーター
-    ├── cli/                # CLI コマンド受付（Commander.js）
-    ├── mcp/                # Cursor / AI エージェント連携用 MCP サーバー
-    └── web/                # Web ダッシュボード開発資材・UI
-        ├── index.html
-        ├── vite.config.ts
-        ├── tailwind.config.js
-        ├── postcss.config.js
-        ├── dist/           # Web ビルド成果物（.gitignore 対象）
-        └── src/            # React 19 UI ソースコード
+    └── ...                 # 製品アプリケーション実装（Clean-Root アーキテクチャ）
 ```
 
 ---
 
-## 4. クイックスタート
+## 3. クイックスタート
 
-> 💡 **インストールと外部プロジェクト導入**: 前提要件、クローンからの初期セットアップ、グローバルリンク、および別プロジェクトへの適用手順（一時適用／完全再構成）については、**[INSTALL_GUIDE.md](INSTALL_GUIDE.md)** をご覧ください。  
-> 💡 **詳細な利用ガイド**: CLI コマンドの全オプション、Web ダッシュボードの各ビューの解説、および Cursor / Claude Desktop 等の AI エージェントと連携する **MCP サーバーの設定・利用方法** については、**[USER_GUIDE.md](USER_GUIDE.md)** をご覧ください。
+### 開発ワークフローの基本サイクル
 
-### CLI コマンドの利用
+1. **仕様定義（Specify モード / `/specify`）**:
+   `docs/` 配下に要求・要件・仕様・テストケースを記述し、リンク整合性を検証。
+   ```bash
+   npm --prefix src run lint
+   ```
+2. **テスト駆動実装（Implement モード / `/implement`）**:
+   仕様に基づき `tests/` にテストを作成（Red）し、`src/` に最小限の実装を行って緑（Green）にする。
+   ```bash
+   npm --prefix src test
+   ```
+3. **品質・地層の監査（Audit モード / `/audit`）**:
+   CLI を通じて仕様と実装の乖離、およびテスト地層の厚み・薄みを客観診断。
+   ```bash
+   ./bin/stratum report
+   ./bin/stratum matrix
+   ```
 
-ラッパースクリプト（`bin/stratum`、または後方互換ラッパー `bin/traceweave`）を使用することで、リポジトリルートから直接コマンドを実行できます。
+---
+
+### CLI コマンド（製品のための品質機能）
+
+`bin/stratum`（または `bin/traceweave`）ラッパーを通じて、リポジトリルートから直接コマンドを実行できます。
 
 ```bash
-# CI 用の静的チェック（不備があれば exit code 1）
+# CI 用の静的チェック（リンク切れや未テスト要件があれば exit code 1）
 ./bin/stratum check
 
-# 外部プロジェクトへの Stratum 導入（解析一時適用 or 完全再構成）
-./bin/stratum adopt /path/to/project --mode overlay
-./bin/stratum adopt /path/to/project --mode restructure
+# 品質充足度および工程地層密度のサマリーレポート
+./bin/stratum report
 
 # トレーサビリティマトリクスの表示
 ./bin/stratum matrix
 
 # アプリケーションの決め事カタログ（全種別の横断探索）
 ./bin/stratum catalog
-./bin/stratum catalog --kind actor
-./bin/stratum catalog --kind decision
 
 # アーキテクチャ意思決定（ADR）と設計（DSN）の相互リンク一覧
 ./bin/stratum decisions
 
-# 品質充足度および工程地層密度のサマリーレポート
-./bin/stratum report
+# 外部プロジェクトへの Stratum 導入（解析一時適用 or 完全再構成）
+./bin/stratum adopt /path/to/project --mode overlay
+./bin/stratum adopt /path/to/project --mode restructure
 
-# 静的 Web ダッシュボードのビルド（src/web/dist/ にアセット生成）
-./bin/stratum build
-
-# ローカルプレビューサーバーの起動 (http://localhost:3000/)
+# （オプショナル）ローカル可視化プレビューサーバーの起動
 ./bin/stratum serve --port 3000
-```
-
-### 開発・検証コマンド
-
-```bash
-# ドキュメントスキーマの検証
-./src/node_modules/.bin/tsx scripts/validate-docs.ts
-
-# 単体・結合・E2Eテストスイートの実行
-./scripts/test.sh
-# または Windows
-.\scripts\test.cmd
-
-# src/ 内での直接開発
-npm --prefix src run build
-npm --prefix src test
 ```
 
 ---
 
-## 5. ドキュメントスキーマ
+## 4. ドキュメント体系 (docs/)
 
 `docs/` 配下に以下のディレクトリを配置し、1ファイル1成果物の Markdown を作成します。
 
@@ -158,97 +167,18 @@ npm --prefix src test
 | `docs/test-cases/` | `test_case` | `TC-xxxx` | 個別検証手順、工程（test_level）、手法（test_method） |
 | `docs/decisions/` | `decision` | `ADR-xxxx` | 設計・アーキテクチャの意思決定ログ |
 
-### テストケースのフロントマター例
-
-```yaml
----
-schema_version: 3
-id: TC-0001
-kind: test_case
-title: トレーサビリティグラフの多段循環参照検知テスト
-status: accepted
-created: "2026-09-12"
-updated: "2026-09-12"
-scope: local
-test_level: unit                  # unit | integration_internal | integration_external | system | acceptance
-test_method: unit_mock            # unit_mock | property_based | api_contract | scenario | e2e | etc.
-verifies: [REQ-0001, SPEC-0002]   # 検証対象の要件・仕様ID
-depends_on: []
-tags: [core, graph]
-links: []
----
-## Content
-
-### Objective
-...
-### Preconditions
-...
-### Steps
-...
-### Expected Results
-...
-```
-
 ---
 
-## 6. 重要度と品質充足度の算出基準 (Sufficiency Scoring)
+## 5. 品質充足度の算出基準 (Sufficiency Scoring)
 
-Stratum のダッシュボード（トレーサビリティマトリクス）やレポートで表示される各要件（REQ）行の**「重要度」**および**「品質充足度（Sufficiency Score）」**は、決定論的ロジック（`SufficiencyScorer`）に基づいて算出されます。
+各要件（REQ）の重要度（`criticality`）と紐づくテストケース（TC）の工程に基づき、0〜100% の品質充足度スコアが決定論的に算出されます。
 
-### 6.1 重要度 (`criticality`) の区分
-
-要件ドキュメント（`docs/requirements/REQ-xxxx.md`）のフロントマターで指定します（省略時は `medium`）。
-
-- `high`: システムの根幹・中核機能。単体テストから結合、受入に至る多層的な検証が必須。
-- `medium`: 一般的な主要機能（デフォルト）。単体テストと結合/システムテストの組み合わせが必要。
-- `low`: 補助的・周辺機能。いずれか1つのテスト工程があれば充足。
-
-### 6.2 紐づくテストケースの自動集計
-
-各要件（`REQ`）に対して、以下のテストケース（`TC`）が自動的に集計対象となります：
-
-1. **直接検証**: `TC` の `verifies` に直接その `REQ` が指定されているテスト
-2. **仕様（SPEC）経由**: その `REQ` に紐づく詳細仕様（`SPEC`）を検証しているテスト（`verifies: [SPEC-xxxx]`）
-
-### 6.3 重要度別の配点基準と充足判定
-
-集計されたテストケースの工程（`test_level`）の有無に基づき、0〜100% のスコアが算出されます。
-
-| 重要度 (`criticality`) | 必須テスト工程と配点 | 完全充足 (`isFullySatisfied`) の基準 |
+| 重要度 (`criticality`) | 必須テスト工程と配点 | 完全充足の基準 |
 |---|---|---|
-| **High** | ・単体テスト (`unit`): **30点**<br/>・内部結合 (`integration_internal`): **25点**<br/>・外部結合 (`integration_external`) または システム (`system`): **25点**<br/>・受入テスト (`acceptance`): **20点**（合計100点） | **スコア 80% 以上**（例: 単体 + 内結 + 外結/ST で80点に達すれば完全充足） |
-| **Medium** | ・単体テスト (`unit`): **50点**<br/>・結合（内/外）または システム (`system`): **50点**<br/>※受入テストが存在する場合はボーナス +10点（上限100点） | **スコア 80% 以上**（単体と結合/STの両方が揃えば100点充足） |
-| **Low** | いずれか1つのテスト工程（単体、内結、外結、ST、受入）が存在すれば **100点**、なければ **0点** | **スコア 100%** |
+| **High** | 単体(30点) + 内結(25点) + 外結/ST(25点) + 受入(20点) | スコア 80% 以上 |
+| **Medium** | 単体(50点) + 結合/ST(50点) ※受入ボーナス+10点 | スコア 80% 以上 |
+| **Low** | いずれか1つのテスト工程が存在すれば 100点 | スコア 100% |
 
-### 6.4 ダッシュボードでのステータス表示
-
-算出スコアに応じて、円グラフ（円形ゲージ）およびステータスラベルが3段階で色分け表示されます：
-
-- **充足（緑 / Teal）**: **80% 以上**（各重要度における必須工程基準をクリアしている状態）
-- **一部充足（黄 / Amber）**: **50% 以上 80% 未満**（単体テストはあるが結合・システムテストが欠落している等）
-- **未充足（赤 / Rose）**: **50% 未満**（テストケース未作成、または High なのに単体テスト 30% のみ等）
-
-### 6.5 Web ダッシュボードの主要ビュー
-
-Web ダッシュボード（`stratum serve` または `stratum build` による静的 HTML）では、以下のビューをタブで切り替えて利用できます：
-
-1. **トレーサビリティマトリクス & 実測観測**:
-   - 表形式で要求〜要件〜仕様〜テストケースのV字トレーサビリティを一覧表示。
-   - 円形ゲージによる品質充足度スコア表示、多軸フィルター、対話型テストランナー、CSV/JSONエクスポート。
-2. **トレーサビリティグラフ (Graph View)**:
-   - 全ドキュメントをノード、依存・検証関係を有向エッジとするインタラクティブなネットワークグラフ。
-   - V字モデルの工程順序に応じたランク別階層レイアウト（Need → Actor/UseCase → Requirement → Spec/Design/ADR → QA/TestCase）。
-   - スムーズなズーム・パン、全体表示フィット、種別フィルター、および特定ノード選択時の上流・下流トレースパス自動強調ハイライト。
-3. **工程地層密度 & ピラミッド診断**:
-   - 5大工程（UT, ITa, ITb, ST, UAT）のテスト量と要件カバー率を立体的に可視化する `VisualTestPyramid`。
-   - 逆ピラミッド（アイスクリームコーン）や結合層空洞化（ひょうたん型）の早期検知。
-4. **決め事カタログ (Architecture & Decisions)**:
-   - アクター、ユースケース、要件、仕様、設計、意思決定（ADR）、品質保証など全種別の決め事を横断探索。
-5. **ギャップ & リスク一覧**:
-   - 未テスト要件、結合テスト欠落要件、未検証仕様の抽出。
-
----
-
-## 7. ライセンス
-
-MIT License
+- **充足（緑）**: 80% 以上
+- **一部充足（黄）**: 50% 以上 80% 未満
+- **未充足（赤）**: 50% 未満（未テスト等）

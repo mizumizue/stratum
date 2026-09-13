@@ -26,7 +26,8 @@
    ```
 2. **Stratum 地層・トレーサビリティ分析を実行する**:
    ```bash
-   ./bin/stratum analyze docs
+   ./bin/stratum report
+   ./bin/stratum matrix
    ```
 3. **テスト実行と客観レポート検証を行う**:
    ```bash
