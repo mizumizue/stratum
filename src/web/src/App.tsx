@@ -61,16 +61,31 @@ export default function App() {
   const fetchData = useCallback(async (isManual = false) => {
     if (isManual) setIsRefreshing(true);
     try {
+      // 1. Initial load from window.__STRATUM_DATA__ if available (fast static render)
+      if (!isManual && typeof window !== 'undefined' && (window as any).__STRATUM_DATA__) {
+        setReport((window as any).__STRATUM_DATA__);
+        setError(null);
+        setLoading(false);
+        return;
+      }
+
       let data: StratumDataPayload;
       try {
         const res = await fetch('/api/data');
         if (!res.ok) throw new Error('API request failed');
         data = await res.json();
       } catch {
-        // Fallback: static data.json in dist-web
-        const resStatic = await fetch('data.json');
-        if (!resStatic.ok) throw new Error('Failed to fetch data.json');
-        data = await resStatic.json();
+        // Fallback: static data.json in dist-web (support relative or base resolution)
+        const staticUrl = new URL('data.json', window.location.href).href;
+        const resStatic = await fetch(staticUrl);
+        if (!resStatic.ok) {
+          // Retry with plain 'data.json'
+          const resRetry = await fetch('data.json');
+          if (!resRetry.ok) throw new Error('Failed to fetch data.json');
+          data = await resRetry.json();
+        } else {
+          data = await resStatic.json();
+        }
       }
       setReport(data);
       setError(null);
@@ -78,10 +93,16 @@ export default function App() {
         toast.success('トレーサビリティデータを更新しました');
       }
     } catch (err: any) {
-      const msg = 'トレーサビリティデータの取得に失敗しました: ' + err.message;
-      setError(msg);
-      if (isManual) {
-        toast.error(msg);
+      // If error occurs during manual refresh, check if window.__STRATUM_DATA__ exists as safety fallback
+      if (typeof window !== 'undefined' && (window as any).__STRATUM_DATA__) {
+        setReport((window as any).__STRATUM_DATA__);
+        setError(null);
+      } else {
+        const msg = 'トレーサビリティデータの取得に失敗しました: ' + err.message;
+        setError(msg);
+        if (isManual) {
+          toast.error(msg);
+        }
       }
     } finally {
       setLoading(false);

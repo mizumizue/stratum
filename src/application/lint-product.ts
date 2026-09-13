@@ -133,7 +133,7 @@ export class ProductLinter {
         command: 'npx',
         args: ['eslint', '.'],
         fixArgs: ['eslint', '--fix', '.'],
-        checkBinary: 'npx',
+        checkBinary: 'eslint',
         description: 'ESLint static code analyzer',
       },
       {
@@ -141,14 +141,14 @@ export class ProductLinter {
         command: 'npx',
         args: ['biome', 'check', '.'],
         fixArgs: ['biome', 'check', '--write', '.'],
-        checkBinary: 'npx',
+        checkBinary: 'biome',
         description: 'Biome modern linter & formatter',
       },
       {
         name: 'tsc',
         command: 'npx',
         args: ['tsc', '--noEmit'],
-        checkBinary: 'npx',
+        checkBinary: 'tsc',
         description: 'TypeScript compiler typecheck',
       },
     ],
@@ -158,7 +158,7 @@ export class ProductLinter {
         command: 'npx',
         args: ['eslint', '.'],
         fixArgs: ['eslint', '--fix', '.'],
-        checkBinary: 'npx',
+        checkBinary: 'eslint',
         description: 'ESLint static code analyzer',
       },
       {
@@ -166,7 +166,7 @@ export class ProductLinter {
         command: 'npx',
         args: ['biome', 'check', '.'],
         fixArgs: ['biome', 'check', '--write', '.'],
-        checkBinary: 'npx',
+        checkBinary: 'biome',
         description: 'Biome modern linter & formatter',
       },
     ],
@@ -371,11 +371,26 @@ export class ProductLinter {
       };
     }
 
+    if (command === 'echo') {
+      const msg = args.join(' ');
+      return {
+        success: true,
+        language,
+        command,
+        args,
+        stdout: `${msg}\n`,
+        stderr: '',
+        exitCode: 0,
+        toolsDetected: [],
+      };
+    }
+
     try {
       const proc = spawnSync(command, args, {
         cwd: productDir,
         encoding: 'utf-8',
         stdio: 'pipe',
+        shell: process.platform === 'win32',
         env: {
           ...process.env,
         },
@@ -409,6 +424,22 @@ export class ProductLinter {
    * システム上で指定されたコマンドが利用可能かチェックする
    */
   private static isCommandAvailable(bin: string, cwd: string): boolean {
+    // 1. check node_modules/.bin in cwd or parent
+    const localBin = path.join(cwd, 'node_modules', '.bin', bin);
+    if (fs.existsSync(localBin)) return true;
+
+    // 2. check package.json dependencies
+    const pkgPath = path.join(cwd, 'package.json');
+    if (fs.existsSync(pkgPath)) {
+      try {
+        const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'));
+        const allDeps = { ...(pkg.dependencies || {}), ...(pkg.devDependencies || {}) };
+        if (allDeps[bin]) return true;
+      } catch {
+        // ignore
+      }
+    }
+
     try {
       const isWin = process.platform === 'win32';
       const checkCmd = isWin ? `where ${bin}` : `command -v ${bin}`;

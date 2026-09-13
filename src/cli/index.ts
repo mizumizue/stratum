@@ -40,6 +40,36 @@ function resolveDocsDir(requestedPath?: string): string {
   return resolved;
 }
 
+function resolveProductDir(requestedPath?: string): string {
+  if (requestedPath) {
+    const resolved = path.resolve(requestedPath);
+    if (fs.existsSync(resolved) && fs.statSync(resolved).isDirectory()) {
+      return resolved;
+    }
+  }
+  const candidateDirs = [
+    path.resolve(process.cwd(), requestedPath || './src'),
+    path.resolve(process.cwd(), '.'),
+    path.resolve(__dirname, '../../src'),
+    path.resolve(__dirname, '../src'),
+  ];
+  for (const dir of candidateDirs) {
+    if (fs.existsSync(dir) && fs.statSync(dir).isDirectory()) {
+      const entries = fs.readdirSync(dir);
+      if (
+        entries.includes('package.json') ||
+        entries.includes('tsconfig.json') ||
+        entries.includes('Cargo.toml') ||
+        entries.includes('go.mod') ||
+        entries.includes('pyproject.toml')
+      ) {
+        return dir;
+      }
+    }
+  }
+  return path.resolve(process.cwd());
+}
+
 const program = new Command();
 
 program
@@ -328,6 +358,21 @@ program
       fs.cpSync(webDistPath, outDir, { recursive: true });
     }
 
+    const targetIndexPath = path.join(outDir, 'index.html');
+    if (fs.existsSync(targetIndexPath)) {
+      let html = fs.readFileSync(targetIndexPath, 'utf-8');
+      const safeJson = dataJson.replace(/</g, '\\u003c');
+      const scriptTag = `<script id="stratum-inline-data">window.__STRATUM_DATA__ = ${safeJson};</script>`;
+      if (html.includes('id="stratum-inline-data"')) {
+        html = html.replace(/<script id="stratum-inline-data">[\s\S]*?<\/script>/, scriptTag);
+      } else if (html.includes('</head>')) {
+        html = html.replace('</head>', `    ${scriptTag}\n  </head>`);
+      } else {
+        html = `${scriptTag}\n${html}`;
+      }
+      fs.writeFileSync(targetIndexPath, html, 'utf-8');
+    }
+
     console.log(`\n\x1b[32m✔ Stratum static dashboard built successfully in "${outDir}"\x1b[0m\n`);
   });
 
@@ -548,13 +593,13 @@ program
 program
   .command('lint-product')
   .description('Run multi-language linter/analyzer for product code in src/ (Python, Go, Rust, TS/JS, etc.)')
-  .option('-p, --product <dir>', 'Product directory path', './src')
+  .option('-p, --product <dir>', 'Product directory path')
   .option('-l, --lang <language>', 'Language override (python, go, rust, typescript, javascript, cpp, java)')
   .option('--fix', 'Automatically fix lint problems if supported', false)
   .option('--dry-run', 'Print detected command without executing', false)
   .action((options) => {
     try {
-      const productDir = path.resolve(options.product);
+      const productDir = resolveProductDir(options.product);
       console.log(`\n🔍 Running multi-language linter for product: ${productDir}`);
 
       const { language, command, args, isCustom } = ProductLinter.resolveCommand({

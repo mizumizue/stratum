@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - 'cursor/**'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: src/package-lock.json
+
+      - name: Install dependencies
+        run: npm --prefix src ci
+
+      - name: Typecheck
+        run: npm --prefix src run typecheck
+
+      - name: Lint documentation & product
+        run: |
+          npm --prefix src run lint
+          npm --prefix src run lint:product
+
+      - name: Build packages & web
+        run: npm --prefix src run build
+
+      - name: Run test suite
+        run: npm --prefix src test
